@@ -15,6 +15,7 @@ class TabelaBDEventos(db: SQLiteDatabase) : TabelaBD(db, NOME) {
         const val descricao = "descricao"
         const val id_localidade = "localidade_id"
         const val organizador_id = "organizador_id"
+        adas
 
     }
 }
