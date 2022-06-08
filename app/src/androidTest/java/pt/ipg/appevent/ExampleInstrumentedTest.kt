@@ -1,12 +1,14 @@
 package pt.ipg.appevent
 
-import androidx.test.platform.app.InstrumentationRegistry
+import android.database.sqlite.SQLiteDatabase
+import android.provider.BaseColumns
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import androidx.test.platform.app.InstrumentationRegistry
+import junit.runner.Version.id
+import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -14,11 +16,32 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
-    @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("pt.ipg.appevent", appContext.packageName)
+class BaseDadosTest {
+    private fun appContext() =
+        InstrumentationRegistry.getInstrumentation().targetContext
+
+    private fun getWritableDatabase(): SQLiteDatabase {
+        val openHelper = BdHelper(appContext())
+        return openHelper.writableDatabase
     }
+
+    }
+    @Test
+    fun consegueAbrirBaseDados() {
+        val openHelper = BdHelper(appContext())
+        val db = openHelper.readableDatabase
+
+        assertTrue(db.isOpen)
+
+        db.close()
+
+/
+
+    db.close()
 }
+
+
+
+
+
+
