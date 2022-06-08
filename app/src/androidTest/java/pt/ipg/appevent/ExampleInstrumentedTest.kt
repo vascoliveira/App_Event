@@ -25,7 +25,10 @@ class BaseDadosTest {
         return openHelper.writableDatabase
     }
 
-    }
+    @Before
+    fun apagaBaseDados() {
+    appContext().deleteDatabase(BdHelper.appContext)
+}
     @Test
     fun consegueAbrirBaseDados() {
         val openHelper = BdHelper(appContext())
@@ -34,10 +37,7 @@ class BaseDadosTest {
         assertTrue(db.isOpen)
 
         db.close()
-
-/
-
-    db.close()
+}
 }
 
 
