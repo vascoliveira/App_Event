@@ -1,10 +1,8 @@
 package pt.ipg.appevent
 
 import android.database.sqlite.SQLiteDatabase
-import android.provider.BaseColumns
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import junit.runner.Version.id
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -25,6 +23,11 @@ class BaseDadosTest {
         return openHelper.writableDatabase
     }
 
+    @Before
+    fun apagaBaseDados() {
+        appContext().deleteDatabase(BdHelper.NOME)
+    }
+
     @Test
     fun consegueAbrirBaseDados() {
         val openHelper = BdHelper(appContext())
@@ -33,7 +36,7 @@ class BaseDadosTest {
         assertTrue(db.isOpen)
 
         db.close()
-}
+    }
 }
 
 
