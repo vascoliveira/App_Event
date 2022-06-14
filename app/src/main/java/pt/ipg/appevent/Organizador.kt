@@ -7,7 +7,7 @@ data class Organizador (
     var idade: Int,
     var Telemovel: Int,
     var email: String,
-    var id_localidade: Long,
+    var id_localidade: Int,
     var id_evento: Long,
     var id: Long = -1
 ) {

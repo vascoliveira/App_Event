@@ -5,7 +5,10 @@ import android.provider.BaseColumns
 
 class TabelaBDOrganizador(db: SQLiteDatabase) : TabelaBD(db, NOME) {
     override fun cria() {
-            db.execSQL("CREATE TABLE $nome(${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,$nome_organizador TEXT NOT NULL, $Idade TEXT NOT NULL, $telemovel TEXT NOT NULL, $Email TEXT NOT NULL $evento_id INTEGER NOT NULL, FOREIGN KEY ($Evento._ID) REFERENCES ${TabelaBDEvento.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT) $Localidade_id INTEGER NOT NULL, FOREIGN KEY ($Localidade._ID) REFERENCES ${TabelaBDLocalidade.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
+            db.execSQL("CREATE TABLE $nome(${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,$nome_organizador TEXT NOT NULL," +
+                    " $Idade TEXT NOT NULL, $telemovel TEXT NOT NULL, $Email TEXT NOT NULL, $evento_id INTEGER NOT NULL,"+
+                    " FOREIGN KEY ($evento_id) REFERENCES ${TabelaBDEvento.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)"+
+                    " $Localidade_id INTEGER NOT NULL, FOREIGN KEY ($Localidade_id) REFERENCES ${TabelaBDLocalidade.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
         }
 
         companion object {

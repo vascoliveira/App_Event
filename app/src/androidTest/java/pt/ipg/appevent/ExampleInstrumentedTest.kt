@@ -25,9 +25,9 @@ class BaseDadosTest {
         return openHelper.writableDatabase
     }
 
-    @Before
+        @Before
     fun apagaBaseDados() {
-    appContext().deleteDatabase(BdHelper.appContext)
+    appContext().deleteDatabase(BdHelper.NOME)
 }
     @Test
     fun consegueAbrirBaseDados() {
