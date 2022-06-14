@@ -23,6 +23,11 @@ class BaseDadosTest {
         return openHelper.writableDatabase
     }
 
+    private fun insereEvento(db: SQLiteDatabase, Evento: Evento) {
+        Evento.id = TabelaBDEvento(db).insert(Evento.toContentValues())
+        assertNotEquals(-1, Evento.id)
+    }
+
     @Before
     fun apagaBaseDados() {
         appContext().deleteDatabase(BdHelper.NOME)
