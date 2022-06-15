@@ -4,11 +4,10 @@ import android.content.ContentValues
 
 data class Organizador (
     var Nome_organizador : String,
-    var idade: Int,
-    var Telemovel: Int,
+    var idade: String,
+    var Telemovel: String,
     var email: String,
-    var id_localidade: Int,
-    var id_evento: Long,
+    var localidade: String,
     var id: Long = -1
 ) {
     fun toContentValues() : ContentValues {
@@ -18,8 +17,7 @@ data class Organizador (
         valores.put(TabelaBDOrganizador.Idade, idade)
         valores.put(TabelaBDOrganizador.telemovel, Telemovel)
         valores.put(TabelaBDOrganizador.Email, email)
-        valores.put(TabelaBDOrganizador.Localidade_id, id_localidade)
-        valores.put(TabelaBDOrganizador.evento_id, id_evento)
+
 
         return valores
     }
