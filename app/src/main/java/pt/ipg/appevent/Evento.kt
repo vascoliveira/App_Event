@@ -14,12 +14,12 @@ data class Evento (
     fun toContentValues() : ContentValues {
         val valores = ContentValues()
 
-        valores.put(TabelaBDEvento.nome_evento, Nome_Evento)
-        valores.put(TabelaBDEvento.data, Data)
-        valores.put(TabelaBDEvento.descricao, Descricao)
-        valores.put(TabelaBDEvento.Localidade, localidade)
-        valores.put(TabelaBDEvento.Tipo_eventos, tipo_eventos)
-        valores.put(TabelaBDEvento.organizador_id, id_Organizador)
+        valores.put(TabelaBDEvento.NOME_EVENTO, Nome_Evento)
+        valores.put(TabelaBDEvento.DATA, Data)
+        valores.put(TabelaBDEvento.DESCRICAO, Descricao)
+        valores.put(TabelaBDEvento.LOCALIDADE, localidade)
+        valores.put(TabelaBDEvento.TIPO_EVENTOS, tipo_eventos)
+        valores.put(TabelaBDEvento.ORGANIZADOR_ID, id_Organizador)
 
         return valores
     }

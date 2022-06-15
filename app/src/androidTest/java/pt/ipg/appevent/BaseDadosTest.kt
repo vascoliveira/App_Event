@@ -23,10 +23,11 @@ class BaseDadosTest {
         return openHelper.writableDatabase
     }
 
-    private fun insereEvento(db: SQLiteDatabase, Evento: Evento) {
-        Evento.id = TabelaBDEvento(db).insert(Evento.toContentValues())
-        assertNotEquals(-1, Evento.id)
+    private fun insereTipoEvento(db: SQLiteDatabase, Tipo: TipoEventos) {
+        Tipo.id = TabelaBDTipoEvento(db).insert(Tipo.toContentValues())
+        assertNotEquals(-1, Tipo.id)
     }
+
 
     @Before
     fun apagaBaseDados() {
@@ -42,7 +43,9 @@ class BaseDadosTest {
 
         db.close()
     }
+
 }
+
 
 
 

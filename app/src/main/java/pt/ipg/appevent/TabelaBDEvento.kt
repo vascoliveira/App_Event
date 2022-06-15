@@ -6,20 +6,20 @@ import android.provider.BaseColumns
 class TabelaBDEvento(db: SQLiteDatabase) : TabelaBD(db, NOME) {
     override fun cria() {
         db.execSQL(
-            "CREATE TABLE $nome (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $nome_evento TEXT NOT NULL," +
-                    " $data TEXT NOT NULL, $descricao TEXT NOT NULL, $Localidade TEXT NOT NULL, $Tipo_eventos TEXT NOT NULL," +
-                    " $organizador_id INTEGER NOT NULL, FOREIGN KEY (${organizador_id}) REFERENCES ${TabelaBDOrganizador.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)"
-        )
+            "CREATE TABLE $nome (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $NOME_EVENTO TEXT NOT NULL," +
+                    " $DATA TEXT NOT NULL, $DESCRICAO TEXT NOT NULL, $LOCALIDADE REFERENCES ${TabelaBDLocalidade.NOME_LOCALIDADE} ON DELETE RESTRICT, " +
+                    "$TIPO_EVENTOS REFERENCES ${TabelaBDTipoEvento.TIPO_EVENTO} ON DELETE RESTRICT,"+
+                    " $ORGANIZADOR_ID REFERENCES ${TabelaBDOrganizador.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
 
     }
     companion object {
         const val NOME = "Eventos"
-        const val nome_evento = "Nome_Evento"
-        const val data = "Data"
-        const val descricao = "descricao"
-        const val Localidade = "Localidade"
-        const val Tipo_eventos = "Tipos Eventos"
-        const val organizador_id = "organizador"
+        const val NOME_EVENTO = "Nome_Evento"
+        const val DATA = "Data"
+        const val DESCRICAO = "descricao"
+        const val LOCALIDADE = "Localidade"
+        const val TIPO_EVENTOS = "Tipos Eventos"
+        const val ORGANIZADOR_ID = "organizador"
 
     }
 }
