@@ -7,17 +7,14 @@ data class Organizador (
     var idade: String,
     var Telemovel: String,
     var email: String,
-    var localidade: String,
     var id: Long = -1
 ) {
-    fun toContentValues() : ContentValues {
+    fun toContentValues(): ContentValues {
         val valores = ContentValues()
-
-        valores.put(TabelaBDOrganizador.nome_organizador, Nome_organizador)
-        valores.put(TabelaBDOrganizador.Idade, idade)
-        valores.put(TabelaBDOrganizador.telemovel, Telemovel)
-        valores.put(TabelaBDOrganizador.Email, email)
-
+        valores.put(TabelaBDOrganizador.NOME_ORGANIZADOR, Nome_organizador)
+        valores.put(TabelaBDOrganizador.IDADE, idade)
+        valores.put(TabelaBDOrganizador.TELEMOVEL, Telemovel)
+        valores.put(TabelaBDOrganizador.EMAIL, email)
 
         return valores
     }
