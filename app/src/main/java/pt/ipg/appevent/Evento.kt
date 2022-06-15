@@ -5,7 +5,7 @@ import android.content.ContentValues
 data class Evento (
     var Nome_Evento : String,
     var Data: String,
-    var Descricao: Long,
+    var Descricao: String,
     var localidade: String,
     var tipo_eventos:String,
     var id_Organizador: Long,

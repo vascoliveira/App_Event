@@ -4,7 +4,7 @@ import android.content.ContentValues
 
 data class Organizador (
     var Nome_organizador : String,
-    var idade: String,
+    var idade: Int,
     var Telemovel: String,
     var email: String,
     var id: Long = -1

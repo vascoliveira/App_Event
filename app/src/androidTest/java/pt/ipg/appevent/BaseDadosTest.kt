@@ -1,12 +1,14 @@
 package pt.ipg.appevent
 
 import android.database.sqlite.SQLiteDatabase
+import android.provider.BaseColumns
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -23,9 +25,22 @@ class BaseDadosTest {
         return openHelper.writableDatabase
     }
 
-    private fun insereTipoEvento(db: SQLiteDatabase, Tipo: TipoEventos) {
-        Tipo.id = TabelaBDTipoEvento(db).insert(Tipo.toContentValues())
-        assertNotEquals(-1, Tipo.id)
+    private fun insereTipoEvento(db: SQLiteDatabase, eventos: TipoEventos) {
+        eventos.id = TabelaBDTipoEvento(db).insert(eventos.toContentValues())
+        assertNotEquals(-1, eventos.id)
+    }
+
+    private fun insereOrganizador(db: SQLiteDatabase, organizador: Organizador) {
+        organizador.id = TabelaBDOrganizador(db).insert(organizador.toContentValues())
+        assertNotEquals(-1, organizador.id)
+    }
+    private fun insereLocalidade(db: SQLiteDatabase, localidade: Localidade) {
+        localidade.id = TabelaBDLocalidade(db).insert(localidade.toContentValues())
+        assertNotEquals(-1, localidade.id)
+    }
+    private fun insereEvento(db: SQLiteDatabase, evento: Evento) {
+        evento.id = TabelaBDEvento(db).insert(evento.toContentValues())
+        assertNotEquals(-1, evento.id)
     }
 
 
@@ -43,6 +58,47 @@ class BaseDadosTest {
 
         db.close()
     }
+
+    @Test
+    fun consegueInserirTipoEvento() {
+        val db = getWritableDatabase()
+
+        insereTipoEvento(db, TipoEventos("Educacao"))
+
+        db.close()
+    }
+
+    @Test
+    fun consegueInserirOrganizador() {
+        val db = getWritableDatabase()
+
+        insereOrganizador(db, Organizador("Vasco",25,"912392239","vascodasd@gamil.com"))
+
+        db.close()
+    }
+
+    @Test
+    fun consegueInserirLocalidade() {
+        val db = getWritableDatabase()
+
+        insereLocalidade(db, Localidade("Lisboa"))
+
+        db.close()
+    }
+
+    @Test
+    fun consegueInserirEvento() {
+        val db = getWritableDatabase()
+
+        val organizador = Organizador("Joao",25,"9123232323","jaoaoda@gmail.com",1)
+        insereOrganizador(db, organizador)
+
+        val evento = Evento("Docas","25/04/2022","Evento no mar","Lisboa","aventura",organizador.id)
+        insereEvento(db,evento)
+
+        db.close()
+    }
+
 
 }
 
