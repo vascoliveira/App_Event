@@ -184,8 +184,26 @@ class BaseDadosTest {
 
         db.close()
     }
+    @Test
+        fun consegueAlterarTipoEvento() {
+        val db = getWritableDatabase()
 
+        val tipoEvento = TipoEventos("Gastronomico")
+        insereTipoEvento(db, tipoEvento)
 
+        tipoEvento.tipo_de_evento = "Espacial"
+
+        val registosAlterados = TabelaBDTipoEvento(db).update(
+            tipoEvento.toContentValues(),
+            "${BaseColumns._ID}=?",
+            arrayOf("${tipoEvento.id}")
+        )
+
+        assertEquals(1, registosAlterados)
+
+        db.close()
+
+    }
 
     @Test
     fun consegueEliminarTipoEvento() {
@@ -202,6 +220,33 @@ class BaseDadosTest {
 
         db.close()
     }
+    @Test
+    fun consegueEliminarEvento() {
+        val db = getWritableDatabase()
+
+        val organizador = Organizador("Joao",37,"91919911","nnajaajaj@jajja.com")
+        insereOrganizador(db, organizador)
+
+        val localidade = Localidade("Coimbra")
+        insereLocalidade(db, localidade)
+
+        val tipoevento = TipoEventos("tecnologico")
+        insereTipoEvento(db, tipoevento)
+
+        val evento = Evento("Praia","25/07/2022","Peniche",organizador.id,localidade.id,tipoevento.id)
+        insereEvento(db,evento)
+
+
+        val registosEliminados = TabelaBDEvento(db).delete(
+            "${BaseColumns._ID}=?",
+            arrayOf("${tipoevento.id}"))
+
+        assertEquals(1, registosEliminados)
+
+        db.close()
+    }
+
+
 }
 
 
