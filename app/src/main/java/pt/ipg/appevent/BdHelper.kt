@@ -15,9 +15,9 @@ class BdHelper (context: Context?) : SQLiteOpenHelper(context, NOME, null, VERSA
         requireNotNull(db)
 
         TabelaBDOrganizador(db).cria()
-        TabelaBDEvento(db).cria()
         TabelaBDLocalidade(db).cria()
         TabelaBDTipoEvento(db).cria()
+        TabelaBDEvento(db).cria()
     }
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
     }
