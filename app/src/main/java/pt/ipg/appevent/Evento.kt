@@ -6,9 +6,9 @@ data class Evento (
     var Nome_Evento : String,
     var Data: String,
     var Descricao: String,
-    var idorganizador: Int,
-    var idlocalidade: Int,
-    var id_tipo_eventos:Int,
+    var idorganizador: Long,
+    var idlocalidade: Long,
+    var id_tipo_eventos: Long,
     var id: Long = -1
 ) {
     fun toContentValues() : ContentValues {
