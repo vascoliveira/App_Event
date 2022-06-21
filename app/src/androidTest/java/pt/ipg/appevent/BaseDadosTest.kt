@@ -58,6 +58,33 @@ class BaseDadosTest {
 
         db.close()
     }
+    @Test
+    fun consegueInserirTipoEvento() {
+        val db = getWritableDatabase()
+
+        insereTipoEvento(db, TipoEventos("Educacao"))
+
+        db.close()
+    }
+
+    @Test
+    fun consegueInserirOrganizador() {
+        val db = getWritableDatabase()
+
+        insereOrganizador(db, Organizador("Vasco",25,"912392239","vascodasd@gamil.com"))
+
+        db.close()
+    }
+
+    @Test
+    fun consegueInserirLocalidade() {
+        val db = getWritableDatabase()
+
+        insereLocalidade(db, Localidade("Lisboa"))
+
+        db.close()
+    }
+
 
 
 
