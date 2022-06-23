@@ -1,6 +1,8 @@
 package pt.ipg.appevent
 
 import android.content.ContentValues
+import android.database.Cursor
+import android.provider.BaseColumns
 
 data class Localidade (
     var Nome_Localidade : String,
@@ -14,4 +16,14 @@ data class Localidade (
 
         return valores
     }
+    companion object {
+        fun fromCursor(cursor: Cursor) : Localidade {
+            val posId = cursor.getColumnIndex(BaseColumns._ID)
+            val posNome = cursor.getColumnIndex(TabelaBDLocalidade.NOME_LOCALIDADE)
+
+            val id = cursor.getLong(posId)
+            val nome = cursor.getString(posNome)
+
+            return Localidade(nome, id)
+        }
 }
