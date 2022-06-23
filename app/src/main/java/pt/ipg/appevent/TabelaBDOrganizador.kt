@@ -12,11 +12,14 @@ class TabelaBDOrganizador(db: SQLiteDatabase) : TabelaBD(db, NOME) {
 
         companion object {
             const val NOME = "Organizador"
+
+            const val CAMPO_ID = "$NOME.${BaseColumns._ID}"
             const val NOME_ORGANIZADOR = "Organizador"
             const val IDADE = "idade"
             const val TELEMOVEL = "telemovel"
             const val EMAIL = "email"
 
+            val TODAS_COLUNAS = arrayOf(CAMPO_ID, NOME_ORGANIZADOR, IDADE, TELEMOVEL, EMAIL)
 
         }
     }

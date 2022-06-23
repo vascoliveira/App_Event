@@ -32,26 +32,34 @@ data class Evento (
             val posNom = cursor.getColumnIndex(TabelaBDEvento.NOME_EVENTO)
             val posData = cursor.getColumnIndex(TabelaBDEvento.DATA)
             val posDesc = cursor.getColumnIndex(TabelaBDEvento.DESCRICAO)
-            val posIdOrganizador = cursor.getColumnIndex(TabelaBDEvento.ORGANIZADOR_ID)
             val posIdLocalidade = cursor.getColumnIndex(TabelaBDEvento.LOCALIDADE_ID)
             val posIdTipoEventos = cursor.getColumnIndex(TabelaBDEvento.TIPO_EVENTOS_ID)
-            val posNomeOrganizador = cursor.getColumnIndex(TabelaBDOrganizador.NOME_ORGANIZADOR)
             val posNomeLocalidade = cursor.getColumnIndex(TabelaBDLocalidade.NOME_LOCALIDADE)
             val posNomeTipoEvento = cursor.getColumnIndex(TabelaBDTipoEvento.TIPO_EVENTO)
+            val posIdOrganizador = cursor.getColumnIndex(TabelaBDEvento.ORGANIZADOR_ID)
+            val posNomeOrganizador = cursor.getColumnIndex(TabelaBDOrganizador.NOME_ORGANIZADOR)
+            val posIdadeOrganizador = cursor.getColumnIndex(TabelaBDOrganizador.IDADE)
+            val posEmailOrganizador = cursor.getColumnIndex(TabelaBDOrganizador.EMAIL)
+            val posTelemovelOrganizador = cursor.getColumnIndex(TabelaBDOrganizador.TELEMOVEL)
 
 
             val id = cursor.getLong(posId)
             val nome = cursor.getString(posNom)
             val data = cursor.getString(posData)
             val descricao = cursor.getString(posDesc)
-            val idOrganizador = cursor.getInt(posIdOrganizador)
             val idLocalidade = cursor.getLong(posIdLocalidade)
             val idTipoEvento = cursor.getLong(posIdTipoEventos)
-            val nomeOrganizador = cursor.getString(posNomeOrganizador)
             val nomeLocalidade = cursor.getString(posNomeLocalidade)
             val nomeTipoEvento = cursor.getString(posNomeTipoEvento)
+            val idOrganizador = cursor.getLong(posIdOrganizador)
+            val nomeOrganizador = cursor.getString(posNomeOrganizador)
+            val idadeOrganizador = cursor.getInt(posIdadeOrganizador)
+            val emailOrganizador = cursor.getString(posEmailOrganizador)
+            val telemovelOrganizador = cursor.getString(posTelemovelOrganizador)
 
-            val organizador = Organizador(nomeOrganizador,idOrganizador)//pergguntar ao prfessor se e preciso adicionar os outros parametros
+
+
+            val organizador = Organizador(nomeOrganizador,idadeOrganizador,telemovelOrganizador,emailOrganizador,idOrganizador)//pergguntar ao prfessor se e preciso adicionar os outros parametros
             val localidade =  Localidade(nomeLocalidade,idLocalidade)
             val tipo_evento = TipoEventos(nomeTipoEvento,idTipoEvento)
 

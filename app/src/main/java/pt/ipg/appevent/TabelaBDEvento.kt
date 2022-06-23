@@ -20,6 +20,8 @@ class TabelaBDEvento(db: SQLiteDatabase) : TabelaBD(db, NOME) {
     }
     companion object {
         const val NOME = "Eventos"
+
+        const val CAMPO_ID = "$NOME.${BaseColumns._ID}"
         const val NOME_EVENTO = "Nome_Evento"
         const val DATA = "Data"
         const val DESCRICAO = "descricao"
@@ -27,6 +29,9 @@ class TabelaBDEvento(db: SQLiteDatabase) : TabelaBD(db, NOME) {
         const val LOCALIDADE_ID = "Localidade"
         const val TIPO_EVENTOS_ID= "Tipos_Eventos"
 
+        val TODAS_COLUNAS = arrayOf(CAMPO_ID, NOME, NOME_EVENTO, DATA, DESCRICAO, ORGANIZADOR_ID,
+            LOCALIDADE_ID, TIPO_EVENTOS_ID,TabelaBDTipoEvento.TIPO_EVENTO,TabelaBDLocalidade.NOME_LOCALIDADE,
+            TabelaBDOrganizador.NOME_ORGANIZADOR)
 
     }
 }

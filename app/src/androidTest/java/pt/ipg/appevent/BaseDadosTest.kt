@@ -107,9 +107,9 @@ class BaseDadosTest {
                 "Docas",
                 "25/04/2022",
                 "Evento no mar",
-                organizador.id,
-                localidade.id,
-                tipo_evento.id
+                organizador,
+                localidade,
+                tipo_evento
             )
         )
 
@@ -171,7 +171,7 @@ class BaseDadosTest {
         val tipo_eventoEconomina = TipoEventos("Economia")
         insereTipoEvento(db, tipo_eventoEconomina)
 
-        val evento = Evento("Praia","25/07/2022","Peniche",organizadorJoao.id,localidadeCoimbra.id,tipo_eventoEconomina.id)
+        val evento = Evento("Praia","25/07/2022","Peniche",organizadorJoao,localidadeCoimbra,tipo_eventoEconomina)
         insereEvento(db,evento)
 
 
@@ -233,7 +233,7 @@ class BaseDadosTest {
         val tipoevento = TipoEventos("tecnologico")
         insereTipoEvento(db, tipoevento)
 
-        val evento = Evento("Praia","25/07/2022","Peniche",organizador.id,localidade.id,tipoevento.id)
+        val evento = Evento("Praia","25/07/2022","Peniche",organizador,localidade,tipoevento)
         insereEvento(db,evento)
 
 
@@ -260,6 +260,31 @@ class BaseDadosTest {
 
         db.close()
     }
+    @Test
+    fun consegueLerLocalidades() {
+        val db = getWritableDatabase()
+
+        val localidade = Localidade("Aveiro")
+        insereLocalidade(db, localidade)
+
+        val cursor = TabelaBDLocalidade(db).query(
+            TabelaBDLocalidade.TODAS_COLUNAS,
+            "${TabelaBDLocalidade.CAMPO_ID}=?",
+            arrayOf("${localidade.id}"),
+            null,
+            null,
+            null)
+
+
+        assertEquals(1, cursor.count)
+        assertTrue(cursor.moveToNext())
+
+        val categoriaBD = Localidade.fromCursor(cursor)
+        assertEquals(localidade, categoriaBD)
+
+        db.close()
+    }
+
 
 
 }

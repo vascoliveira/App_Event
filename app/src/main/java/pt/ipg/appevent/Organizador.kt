@@ -29,9 +29,6 @@ data class Organizador (
             val posIdade = cursor.getColumnIndex(TabelaBDOrganizador.IDADE)
             val posTelemovel = cursor.getColumnIndex(TabelaBDOrganizador.TELEMOVEL)
 
-
-
-
             val id = cursor.getLong(posId)
             val nome = cursor.getString(posNome)
             val email = cursor.getString(posEmail)

@@ -9,7 +9,11 @@ class TabelaBDTipoEvento (db: SQLiteDatabase) : TabelaBD(db, NOME) {
         db.execSQL("CREATE TABLE $nome(${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $TIPO_EVENTO TEXT NOT NULL)")
     }    companion object {
         const val NOME = "TIPOEVENTOS"
+
+        const val CAMPO_ID = "$NOME.${BaseColumns._ID}"
         const val TIPO_EVENTO = "TipodeEvento"
+
+        val TODAS_COLUNAS = arrayOf(CAMPO_ID, TIPO_EVENTO)
 
     }
 }
