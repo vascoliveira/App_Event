@@ -279,11 +279,68 @@ class BaseDadosTest {
         assertEquals(1, cursor.count)
         assertTrue(cursor.moveToNext())
 
-        val categoriaBD = Localidade.fromCursor(cursor)
-        assertEquals(localidade, categoriaBD)
+        val localidadeBD = Localidade.fromCursor(cursor)
+        assertEquals(localidade, localidadeBD)
 
         db.close()
     }
+        @Test
+        fun consegueLerOrganizador() {
+            val db = getWritableDatabase()
+
+            val organizador= Organizador("Vasco",25,"91919292","asdasd@sadas")
+            insereOrganizador(db, organizador)
+
+            val cursor = TabelaBDOrganizador(db).query(
+                TabelaBDOrganizador.TODAS_COLUNAS,
+                "${TabelaBDOrganizador.CAMPO_ID}=?",
+                arrayOf("${organizador.id}"),
+                null,
+                null,
+                null
+            )
+            assertEquals(1, cursor.count)
+            assertTrue(cursor.moveToNext())
+
+            val organizadorBD = Organizador.fromCursor(cursor)
+            assertEquals(organizador, organizadorBD)
+
+            db.close()
+        }
+    @Test
+    fun consegueLerEvento() {
+        val db = getWritableDatabase()
+
+        val localidade = Localidade("Porto")
+        insereLocalidade(db, localidade)
+
+        val tipoevento = TipoEventos("Musica")
+        insereTipoEvento(db,tipoevento)
+
+        val organizador = Organizador("Vasco",23,"232131213","asdasdsad@")
+        insereOrganizador(db,organizador)
+
+        val evento = Evento("Rock on Rio","23/12/22","musica",organizador,localidade,tipoevento)
+        insereEvento(db,evento)
+
+        val cursor = TabelaBDEvento(db).query(
+            TabelaBDEvento.TODAS_COLUNAS,
+            "${TabelaBDEvento.CAMPO_ID}=?",
+            arrayOf("${evento.id}"),
+            null,
+            null,
+            null
+        )
+
+        assertEquals(1, cursor.count)
+        assertTrue(cursor.moveToNext())
+
+        val eventoBD = Evento.fromCursor(cursor)
+        assertEquals(evento, eventoBD)
+
+        db.close()
+    }
+
 
 
 
