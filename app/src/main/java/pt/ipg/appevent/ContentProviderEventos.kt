@@ -128,9 +128,9 @@ class ContentProviderLivros : ContentProvider() {
 
         return when (getUriMatcher().match(uri)) {
             URI_Evento -> TabelaBDEvento(db).query(colunas, selection, selArgs,null,null, sortOrder)
-            URI_Organizador -> TabelaBDOrganizador(db).query(colunas, selection, selArgs, null, null, sortOrder)
+            URI_tipoEvento -> TabelaBDTipoEvento(db).query(colunas, selection, selArgs, null, null, sortOrder)
             URI_Evento_Especifico -> TabelaBDEvento(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("$id"), null, null, null)
-            URI_Organizador_Especifico -> TabelaBDOrganizador(db).query(colunas,"${BaseColumns._ID}=?", arrayOf("$id"), null, null, null)
+            URI_tipoEvento_Especifico -> TabelaBDTipoEvento(db).query(colunas,"${BaseColumns._ID}=?", arrayOf("$id"), null, null, null)
             else -> null
         }
     }
@@ -157,9 +157,9 @@ class ContentProviderLivros : ContentProvider() {
     override fun getType(uri: Uri): String? =
         when(getUriMatcher().match(uri)) {
             URI_Evento -> "$MULTIPLOS_REGISTOS/${TabelaBDEvento.NOME}"
-            URI_Organizador -> "$MULTIPLOS_REGISTOS/${TabelaBDOrganizador.NOME}"
+            URI_tipoEvento -> "$MULTIPLOS_REGISTOS/${TabelaBDTipoEvento.NOME}"
             URI_Evento_Especifico -> "$UNICO_REGISTO/${TabelaBDEvento.NOME}"
-            URI_Organizador_Especifico -> "$UNICO_REGISTO/${TabelaBDOrganizador.NOME}"
+            URI_tipoEvento_Especifico -> "$UNICO_REGISTO/${TabelaBDTipoEvento.NOME}"
             else -> null
         }
 
@@ -182,7 +182,7 @@ class ContentProviderLivros : ContentProvider() {
 
         val id = when (getUriMatcher().match(uri)) {
             URI_Evento -> TabelaBDEvento(db).insert(values)
-            URI_Organizador -> TabelaBDOrganizador(db).insert(values)
+            URI_tipoEvento -> TabelaBDTipoEvento(db).insert(values)
             else -> -1
         }
 
@@ -220,7 +220,7 @@ class ContentProviderLivros : ContentProvider() {
         val id = uri.lastPathSegment
 
         return when (getUriMatcher().match(uri)) {
-            URI_Organizador_Especifico -> TabelaBDOrganizador(db).delete("${BaseColumns._ID}=?", arrayOf("$id"))
+            URI_tipoEvento_Especifico -> TabelaBDOrganizador(db).delete("${BaseColumns._ID}=?", arrayOf("$id"))
             URI_Evento_Especifico -> TabelaBDEvento(db).delete("${BaseColumns._ID}=?", arrayOf("$id"))
             else -> 0
         }
@@ -254,7 +254,7 @@ class ContentProviderLivros : ContentProvider() {
         val id = uri.lastPathSegment
 
         return when (getUriMatcher().match(uri)) {
-            URI_Organizador_Especifico -> TabelaBDOrganizador(db).update(values, "${BaseColumns._ID}=?", arrayOf("$id"))
+            URI_tipoEvento_Especifico -> TabelaBDOrganizador(db).update(values, "${BaseColumns._ID}=?", arrayOf("$id"))
             URI_Evento_Especifico -> TabelaBDEvento(db).update(values,"${BaseColumns._ID}=?", arrayOf("$id"))
             else -> 0
         }
@@ -263,8 +263,8 @@ class ContentProviderLivros : ContentProvider() {
     companion object {
         private const val AUTORIDADE = "pt.ipg.livros"
 
-        private const val URI_Organizador = 100
-        private const val URI_Organizador_Especifico = 101
+        private const val URI_tipoEvento = 100
+        private const val URI_tipoEvento_Especifico = 101
         private const val URI_Evento = 200
         private const val URI_Evento_Especifico = 201
 
@@ -273,13 +273,13 @@ class ContentProviderLivros : ContentProvider() {
 
         private val ENDERECO_BASE = Uri.parse("content://$AUTORIDADE")
         val ENDERECO_EVENTOS = Uri.withAppendedPath(ENDERECO_BASE, TabelaBDEvento.NOME)
-        val ENDERECO_ORGANIZADOR = Uri.withAppendedPath(ENDERECO_BASE, TabelaBDOrganizador.NOME)
+        val ENDERECO_tipoEvento = Uri.withAppendedPath(ENDERECO_BASE, TabelaBDTipoEvento.NOME)
 
         fun getUriMatcher() : UriMatcher {
             val uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
-            uriMatcher.addURI(AUTORIDADE, TabelaBDOrganizador.NOME, URI_Organizador)
-            uriMatcher.addURI(AUTORIDADE, "${TabelaBDOrganizador.NOME}/#", URI_Organizador_Especifico)
+            uriMatcher.addURI(AUTORIDADE, TabelaBDTipoEvento.NOME, URI_tipoEvento)
+            uriMatcher.addURI(AUTORIDADE, "${TabelaBDTipoEvento.NOME}/#", URI_tipoEvento_Especifico)
             uriMatcher.addURI(AUTORIDADE, TabelaBDEvento.NOME, URI_Evento)
             uriMatcher.addURI(AUTORIDADE, "${TabelaBDEvento.NOME}/#", URI_Evento_Especifico)
 
