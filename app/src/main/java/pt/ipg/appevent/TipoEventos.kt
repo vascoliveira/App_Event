@@ -5,7 +5,7 @@ import android.database.Cursor
 import android.provider.BaseColumns
 
 data class TipoEventos (
-    var tipo_de_evento : String,
+    var tipo_de_evento : String = "",
     var id: Long = -1
 ) {
     fun toContentValues(): ContentValues {

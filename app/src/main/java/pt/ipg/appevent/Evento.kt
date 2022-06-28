@@ -13,7 +13,7 @@ data class Evento (
     var tipo_eventos: TipoEventos,
     var id: Long = -1
 ) {
-    fun toContentValues() : ContentValues {
+    fun toContentValues(): ContentValues {
         val valores = ContentValues()
 
         valores.put(TabelaBDEvento.NOME_EVENTO, Nome_Evento)
@@ -23,10 +23,10 @@ data class Evento (
         valores.put(TabelaBDEvento.LOCALIDADE_ID, localidade.id)
         valores.put(TabelaBDEvento.TIPO_EVENTOS_ID, tipo_eventos.id)
 
-
         return valores
     }
-    companion object{
+
+    companion object {
         fun fromCursor(cursor: Cursor): Evento {
             val posId = cursor.getColumnIndex(BaseColumns._ID)
             val posNom = cursor.getColumnIndex(TabelaBDEvento.NOME_EVENTO)
@@ -34,9 +34,11 @@ data class Evento (
             val posDesc = cursor.getColumnIndex(TabelaBDEvento.DESCRICAO)
             val posIdLocalidade = cursor.getColumnIndex(TabelaBDEvento.LOCALIDADE_ID)
             val posIdTipoEventos = cursor.getColumnIndex(TabelaBDEvento.TIPO_EVENTOS_ID)
+            val posIdOrganizador = cursor.getColumnIndex(TabelaBDEvento.ORGANIZADOR_ID)
+
             val posNomeLocalidade = cursor.getColumnIndex(TabelaBDLocalidade.NOME_LOCALIDADE)
             val posNomeTipoEvento = cursor.getColumnIndex(TabelaBDTipoEvento.TIPO_EVENTO)
-            val posIdOrganizador = cursor.getColumnIndex(TabelaBDEvento.ORGANIZADOR_ID)
+
             val posNomeOrganizador = cursor.getColumnIndex(TabelaBDOrganizador.NOME_ORGANIZADOR)
             val posIdadeOrganizador = cursor.getColumnIndex(TabelaBDOrganizador.IDADE)
             val posEmailOrganizador = cursor.getColumnIndex(TabelaBDOrganizador.EMAIL)
@@ -58,12 +60,17 @@ data class Evento (
             val telemovelOrganizador = cursor.getString(posTelemovelOrganizador)
 
 
+            val organizador = Organizador(
+                nomeOrganizador,
+                idadeOrganizador,
+                telemovelOrganizador,
+                emailOrganizador,
+                idOrganizador
+            )
+            val localidade = Localidade(nomeLocalidade, idLocalidade)
+            val tipo_evento = TipoEventos(nomeTipoEvento, idTipoEvento)
 
-            val organizador = Organizador(nomeOrganizador,idadeOrganizador,telemovelOrganizador,emailOrganizador,idOrganizador)//pergguntar ao prfessor se e preciso adicionar os outros parametros
-            val localidade =  Localidade(nomeLocalidade,idLocalidade)
-            val tipo_evento = TipoEventos(nomeTipoEvento,idTipoEvento)
-
-            return Evento (nome,data,descricao,organizador,localidade,tipo_evento,id)
+            return Evento(nome, data, descricao, organizador, localidade, tipo_evento, id)
         }
     }
 }

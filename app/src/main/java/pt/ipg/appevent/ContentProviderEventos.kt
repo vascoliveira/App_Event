@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.net.Uri
 import android.provider.BaseColumns
 
-class ContentProviderLivros : ContentProvider() {
+class ContentProviderEventos : ContentProvider() {
     var dbOpenHelper : BdHelper? = null
 
     /**

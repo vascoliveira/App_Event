@@ -14,19 +14,21 @@
         android:theme="@style/Theme.Appevent"
         tools:targetApi="31">
         <activity
-            android:name=".Main_Activity_Fragment"
-            android:exported="false"
-            android:label="@string/title_activity_main_fragment"
-            android:theme="@style/Theme.Appevent.NoActionBar" />
-        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="main_fragment"
+            android:theme="@style/Theme.Appevent.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+        android:authorities="pt.ipg.appevent"
+        android:name=".ContentProviderEventos"
+        android:exported="false" />
+
     </application>
 
 </manifest>

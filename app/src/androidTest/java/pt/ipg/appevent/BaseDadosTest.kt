@@ -245,6 +245,7 @@ class BaseDadosTest {
 
         db.close()
     }
+
     @Test
     fun consegueEliminarLocalidade() {
         val db = getWritableDatabase()
@@ -281,6 +282,30 @@ class BaseDadosTest {
 
         val localidadeBD = Localidade.fromCursor(cursor)
         assertEquals(localidade, localidadeBD)
+
+        db.close()
+    }
+    @Test
+    fun consegueLerTipoEvento() {
+        val db = getWritableDatabase()
+
+        val tipoEvento = TipoEventos("Educacao")
+        insereTipoEvento(db, tipoEvento)
+
+        val cursor = TabelaBDTipoEvento(db).query(
+            TabelaBDTipoEvento.TODAS_COLUNAS,
+            "${TabelaBDTipoEvento.CAMPO_ID}=?",
+            arrayOf("${tipoEvento.id}"),
+            null,
+            null,
+            null)
+
+
+        assertEquals(1, cursor.count)
+        assertTrue(cursor.moveToNext())
+
+        val tipoEventoBD = TipoEventos.fromCursor(cursor)
+        assertEquals(tipoEvento, tipoEventoBD)
 
         db.close()
     }
