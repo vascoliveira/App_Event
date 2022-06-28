@@ -27,3 +27,5 @@ data class Localidade (
             return Localidade(nome, id)
         }
 }
+}
+
