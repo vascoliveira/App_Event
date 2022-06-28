@@ -311,7 +311,7 @@ class BaseDadosTest {
     fun consegueLerEvento() {
         val db = getWritableDatabase()
 
-        val localidade = Localidade("Porto")
+        val localidade = Localidade("Lisboa")
         insereLocalidade(db, localidade)
 
         val tipoevento = TipoEventos("Musica")
