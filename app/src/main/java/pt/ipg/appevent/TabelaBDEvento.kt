@@ -18,6 +18,7 @@ class TabelaBDEvento(db: SQLiteDatabase) : TabelaBD(db, NOME) {
                     "FOREIGN KEY ($LOCALIDADE_ID) REFERENCES ${TabelaBDLocalidade.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT, " +
                     "FOREIGN KEY($TIPO_EVENTOS_ID)REFERENCES ${TabelaBDTipoEvento.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
+
         companion object {
         const val NOME = "Eventos"
 

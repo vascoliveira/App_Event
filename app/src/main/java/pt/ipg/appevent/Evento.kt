@@ -49,15 +49,15 @@ data class Evento (
             val nome = cursor.getString(posNom)
             val data = cursor.getString(posData)
             val descricao = cursor.getString(posDesc)
-            val idLocalidade = cursor.getLong(posIdLocalidade)
-            val idTipoEvento = cursor.getLong(posIdTipoEventos)
             val nomeLocalidade = cursor.getString(posNomeLocalidade)
             val nomeTipoEvento = cursor.getString(posNomeTipoEvento)
-            val idOrganizador = cursor.getLong(posIdOrganizador)
             val nomeOrganizador = cursor.getString(posNomeOrganizador)
             val idadeOrganizador = cursor.getInt(posIdadeOrganizador)
             val emailOrganizador = cursor.getString(posEmailOrganizador)
             val telemovelOrganizador = cursor.getString(posTelemovelOrganizador)
+            val idOrganizador = cursor.getLong(posIdOrganizador)
+            val idLocalidade = cursor.getLong(posIdLocalidade)
+            val idTipoEvento = cursor.getLong(posIdTipoEventos)
 
 
             val organizador = Organizador(
