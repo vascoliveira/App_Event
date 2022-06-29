@@ -101,17 +101,8 @@ class BaseDadosTest {
         val tipo_evento = TipoEventos("Aventura")
         insereTipoEvento(db, tipo_evento)
 
-        insereEvento(
-            db,
-            Evento(
-                "Docas",
-                "25/04/2022",
-                "Evento no mar",
-                organizador,
-                localidade,
-                tipo_evento
-            )
-        )
+        val evento = Evento ("Docas","23/3/22","dadasd",organizador.id,localidade.id,tipo_evento.id)
+        insereEvento(db,evento)
 
         db.close()
     }
@@ -171,7 +162,7 @@ class BaseDadosTest {
         val tipo_eventoEconomina = TipoEventos("Economia")
         insereTipoEvento(db, tipo_eventoEconomina)
 
-        val evento = Evento("Praia","25/07/2022","Peniche",organizadorJoao,localidadeCoimbra,tipo_eventoEconomina)
+        val evento = Evento("Praia","25/07/2022","Peniche",organizadorJoao.id,localidadeCoimbra.id,tipo_eventoEconomina.id)
         insereEvento(db,evento)
 
 
@@ -233,7 +224,7 @@ class BaseDadosTest {
         val tipoevento = TipoEventos("tecnologico")
         insereTipoEvento(db, tipoevento)
 
-        val evento = Evento("Praia","25/07/2022","Peniche",organizador,localidade,tipoevento)
+        val evento = Evento("Praia","25/07/2022","Peniche",organizador.id,localidade.id,tipoevento.id)
         insereEvento(db,evento)
 
 
@@ -345,7 +336,7 @@ class BaseDadosTest {
         val tipoevento = TipoEventos("Musica")
         insereTipoEvento(db,tipoevento)
 
-        val evento = Evento("Ro ck on Rio","23/12/22","musica",organizador,localidade,tipoevento)
+        val evento = Evento("Ro ck on Rio","23/12/22","musica",organizador.id,localidade.id,tipoevento.id)
         insereEvento(db,evento)
 
         val cursor = TabelaBDEvento(db).query(
