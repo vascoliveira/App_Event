@@ -128,9 +128,13 @@ class ContentProviderEventos : ContentProvider() {
 
         return when (getUriMatcher().match(uri)) {
             URI_Evento -> TabelaBDEvento(db).query(colunas, selection, selArgs,null,null, sortOrder)
-            URI_tipoEvento -> TabelaBDTipoEvento(db).query(colunas, selection, selArgs, null, null, sortOrder)
             URI_Evento_Especifico -> TabelaBDEvento(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("$id"), null, null, null)
+            URI_tipoEvento -> TabelaBDTipoEvento(db).query(colunas, selection, selArgs, null, null, sortOrder)
             URI_tipoEvento_Especifico -> TabelaBDTipoEvento(db).query(colunas,"${BaseColumns._ID}=?", arrayOf("$id"), null, null, null)
+            URI_localidade -> TabelaBDLocalidade(db).query(colunas, selection, selArgs, null, null, sortOrder)
+            URI_localidade_especifica -> TabelaBDLocalidade(db).query(colunas,"${BaseColumns._ID}=?", arrayOf("$id"), null, null, null)
+            URI_organizador -> TabelaBDOrganizador(db).query(colunas, selection, selArgs, null, null, sortOrder)
+            URI_organizador_especifico -> TabelaBDOrganizador(db).query(colunas,"${BaseColumns._ID}=?", arrayOf("$id"), null, null, null)
             else -> null
         }
     }
@@ -158,8 +162,14 @@ class ContentProviderEventos : ContentProvider() {
         when(getUriMatcher().match(uri)) {
             URI_Evento -> "$MULTIPLOS_REGISTOS/${TabelaBDEvento.NOME}"
             URI_tipoEvento -> "$MULTIPLOS_REGISTOS/${TabelaBDTipoEvento.NOME}"
+            URI_localidade -> "$MULTIPLOS_REGISTOS/${TabelaBDLocalidade.NOME}"
+            URI_organizador -> "$MULTIPLOS_REGISTOS/${TabelaBDOrganizador.NOME}"
+
             URI_Evento_Especifico -> "$UNICO_REGISTO/${TabelaBDEvento.NOME}"
             URI_tipoEvento_Especifico -> "$UNICO_REGISTO/${TabelaBDTipoEvento.NOME}"
+            URI_localidade_especifica -> "$UNICO_REGISTO/${TabelaBDTipoEvento.NOME}"
+            URI_organizador_especifico -> "$UNICO_REGISTO/${TabelaBDTipoEvento.NOME}"
+
             else -> null
         }
 
@@ -183,6 +193,9 @@ class ContentProviderEventos : ContentProvider() {
         val id = when (getUriMatcher().match(uri)) {
             URI_Evento -> TabelaBDEvento(db).insert(values)
             URI_tipoEvento -> TabelaBDTipoEvento(db).insert(values)
+            URI_localidade -> TabelaBDLocalidade(db).insert(values)
+            URI_organizador -> TabelaBDOrganizador(db).insert(values)
+
             else -> -1
         }
 
@@ -222,6 +235,8 @@ class ContentProviderEventos : ContentProvider() {
         return when (getUriMatcher().match(uri)) {
             URI_tipoEvento_Especifico -> TabelaBDOrganizador(db).delete("${BaseColumns._ID}=?", arrayOf("$id"))
             URI_Evento_Especifico -> TabelaBDEvento(db).delete("${BaseColumns._ID}=?", arrayOf("$id"))
+            URI_localidade_especifica -> TabelaBDEvento(db).delete("${BaseColumns._ID}=?", arrayOf("$id"))
+            URI_organizador_especifico -> TabelaBDOrganizador(db).delete("${BaseColumns._ID}=?", arrayOf("$id"))
             else -> 0
         }
     }
@@ -254,8 +269,10 @@ class ContentProviderEventos : ContentProvider() {
         val id = uri.lastPathSegment
 
         return when (getUriMatcher().match(uri)) {
-            URI_tipoEvento_Especifico -> TabelaBDOrganizador(db).update(values, "${BaseColumns._ID}=?", arrayOf("$id"))
+            URI_tipoEvento_Especifico -> TabelaBDTipoEvento(db).update(values, "${BaseColumns._ID}=?", arrayOf("$id"))
             URI_Evento_Especifico -> TabelaBDEvento(db).update(values,"${BaseColumns._ID}=?", arrayOf("$id"))
+            URI_localidade_especifica -> TabelaBDLocalidade(db).update(values,"${BaseColumns._ID}=?", arrayOf("$id"))
+            URI_organizador_especifico -> TabelaBDOrganizador(db).update(values,"${BaseColumns._ID}=?", arrayOf("$id"))
             else -> 0
         }
     }
@@ -267,21 +284,33 @@ class ContentProviderEventos : ContentProvider() {
         private const val URI_tipoEvento_Especifico = 101
         private const val URI_Evento = 200
         private const val URI_Evento_Especifico = 201
+        private const val URI_organizador = 300
+        private const val URI_organizador_especifico = 301
+        private const val URI_localidade = 400
+        private const val URI_localidade_especifica = 401
+
 
         private const val UNICO_REGISTO = "vnd.android.cursor.item"
         private const val MULTIPLOS_REGISTOS = "vnd.android.cursor.dir"
 
         private val ENDERECO_BASE = Uri.parse("content://$AUTORIDADE")
         val ENDERECO_EVENTOS = Uri.withAppendedPath(ENDERECO_BASE, TabelaBDEvento.NOME)
-        val ENDERECO_tipoEvento = Uri.withAppendedPath(ENDERECO_BASE, TabelaBDTipoEvento.NOME)
+        val ENDERECO_TIPOEVENTO = Uri.withAppendedPath(ENDERECO_BASE, TabelaBDTipoEvento.NOME)
+        val ENDERECO_LOCALIDADE = Uri.withAppendedPath(ENDERECO_BASE, TabelaBDLocalidade.NOME)
+        val ENDERECO_ORGANIZADOR = Uri.withAppendedPath(ENDERECO_BASE, TabelaBDOrganizador.NOME)
+
 
         fun getUriMatcher() : UriMatcher {
             val uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
-            uriMatcher.addURI(AUTORIDADE, TabelaBDTipoEvento.NOME, URI_tipoEvento)
-            uriMatcher.addURI(AUTORIDADE, "${TabelaBDTipoEvento.NOME}/#", URI_tipoEvento_Especifico)
             uriMatcher.addURI(AUTORIDADE, TabelaBDEvento.NOME, URI_Evento)
             uriMatcher.addURI(AUTORIDADE, "${TabelaBDEvento.NOME}/#", URI_Evento_Especifico)
+            uriMatcher.addURI(AUTORIDADE, TabelaBDTipoEvento.NOME, URI_tipoEvento)
+            uriMatcher.addURI(AUTORIDADE, "${TabelaBDTipoEvento.NOME}/#", URI_tipoEvento_Especifico)
+            uriMatcher.addURI(AUTORIDADE, TabelaBDOrganizador.NOME, URI_organizador)
+            uriMatcher.addURI(AUTORIDADE, "${TabelaBDOrganizador.NOME}/#", URI_organizador_especifico)
+            uriMatcher.addURI(AUTORIDADE, TabelaBDLocalidade.NOME, URI_localidade)
+            uriMatcher.addURI(AUTORIDADE, "${TabelaBDOrganizador.NOME}/#", URI_localidade_especifica)
 
             return uriMatcher
         }
