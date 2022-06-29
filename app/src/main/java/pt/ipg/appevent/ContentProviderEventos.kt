@@ -278,7 +278,7 @@ class ContentProviderEventos : ContentProvider() {
     }
 
     companion object {
-        private const val AUTORIDADE = "pt.ipg.livros"
+        private const val AUTORIDADE = "pt.ipg.appevent"
 
         private const val URI_tipoEvento = 100
         private const val URI_tipoEvento_Especifico = 101

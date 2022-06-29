@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/Organizador"
+        android:id="@+id/TipoEvento"
         android:layout_width="159dp"
         android:layout_height="48dp"
         android:layout_marginBottom="376dp"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/tipoevento"
+        android:id="@+id/Orgazinador"
         android:layout_width="159dp"
         android:layout_height="48dp"
         android:layout_marginBottom="476dp"

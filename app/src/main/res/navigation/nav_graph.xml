@@ -20,21 +20,69 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="pt.ipg.appevent.SecondFragment"
+        android:name="pt.ipg.appevent.ListarOrganizadorFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_listar_organizador">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/MenuPrincipalFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_editarOrganizadorFragment"
+            app:destination="@id/editarOrganizadorFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_eliminarOrganizadorFragment"
+            app:destination="@id/eliminarOrganizadorFragment" />
     </fragment>
     <fragment
         android:id="@+id/listarEventos"
         android:name="pt.ipg.appevent.ListarEventosFragment"
         android:label="fragment_listar_eventos_list"
-        tools:layout="@layout/fragment_listar_eventos_list" >
+        tools:layout="@layout/fragment_listar_eventos" >
         <action
             android:id="@+id/action_listarEventos_to_MenuPrincipalFragment"
             app:destination="@id/MenuPrincipalFragment" />
+        <action
+            android:id="@+id/action_listarEventos_to_eliminarEventoFragment"
+            app:destination="@id/eliminarEventoFragment" />
+        <action
+            android:id="@+id/action_listarEventos_to_editarEventoFragment"
+            app:destination="@id/editarEventoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarOrganizadorFragment"
+        android:name="pt.ipg.appevent.EditarOrganizadorFragment"
+        android:label="fragment_editar_organizador"
+        tools:layout="@layout/fragment_editar_organizador" >
+        <action
+            android:id="@+id/action_editarOrganizadorFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eliminarOrganizadorFragment"
+        android:name="pt.ipg.appevent.EliminarOrganizadorFragment"
+        android:label="fragment_eliminar_organizador"
+        tools:layout="@layout/fragment_eliminar_organizador" >
+        <action
+            android:id="@+id/action_eliminarOrganizadorFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarEventoFragment"
+        android:name="pt.ipg.appevent.editarEventoFragment"
+        android:label="fragment_editar_evento"
+        tools:layout="@layout/fragment_editar_evento" >
+        <action
+            android:id="@+id/action_editarEventoFragment_to_listarEventos"
+            app:destination="@id/listarEventos" />
+    </fragment>
+    <fragment
+        android:id="@+id/eliminarEventoFragment"
+        android:name="pt.ipg.appevent.eliminarEventoFragment"
+        android:label="fragment_eliminar_evento"
+        tools:layout="@layout/fragment_eliminar_evento" >
+        <action
+            android:id="@+id/action_eliminarEventoFragment_to_listarEventos"
+            app:destination="@id/listarEventos" />
     </fragment>
 </navigation>
