@@ -336,14 +336,14 @@ class BaseDadosTest {
     fun consegueLerEvento() {
         val db = getWritableDatabase()
 
+        val organizador = Organizador("Vasco",23,"232131213","asdasdsad@")
+        insereOrganizador(db,organizador)
+
         val localidade = Localidade("Lisboa")
         insereLocalidade(db, localidade)
 
         val tipoevento = TipoEventos("Musica")
         insereTipoEvento(db,tipoevento)
-
-        val organizador = Organizador("Vasco",23,"232131213","asdasdsad@")
-        insereOrganizador(db,organizador)
 
         val evento = Evento("Ro ck on Rio","23/12/22","musica",organizador,localidade,tipoevento)
         insereEvento(db,evento)

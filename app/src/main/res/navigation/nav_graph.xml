@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/listarEventos"
-        android:name="pt.ipg.appevent.ListarEventos"
+        android:name="pt.ipg.appevent.ListarEventosFragment"
         android:label="fragment_listar_eventos_list"
         tools:layout="@layout/fragment_listar_eventos_list" >
         <action
