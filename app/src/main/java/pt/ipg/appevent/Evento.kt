@@ -3,6 +3,7 @@ package pt.ipg.appevent
 import android.content.ContentValues
 import android.database.Cursor
 import android.provider.BaseColumns
+import java.io.Serializable
 
 data class Evento (
     var Nome_Evento : String,
@@ -12,7 +13,7 @@ data class Evento (
     var localidade: Long,
     var tipo_eventos: Long,
     var id: Long = -1
-) {
+): Serializable {
     fun toContentValues(): ContentValues {
         val valores = ContentValues()
 

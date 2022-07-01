@@ -1,59 +1,157 @@
 package pt.ipg.appevent
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import pt.ipg.appevent.Organizador
+import pt.ipg.appevent.ContentProviderEventos
+import com.google.android.material.snackbar.Snackbar
+import pt.ipg.appevent.databinding.FragmentEditarOrganizadorBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class EditarOrganizadorFragment : Fragment(){
+    private var _binding: FragmentEditarOrganizadorBinding? = null
 
-/**
- * A simple [Fragment] subclass.
- * Use the [EditarOrganizadorFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class EditarOrganizadorFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var organizador: Organizador? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_editar_organizador, container, false)
+        _binding = FragmentEditarOrganizadorBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val activity = requireActivity() as MainActivity
+        activity.fragment = this
+        activity.idMenuAtual = R.menu.menu_edicao
+
+        if (arguments != null) {
+            organizador = EditarOrganizadorFragmentArgs.fromBundle(arguments!!).organizador
+
+            if (organizador != null) {
+                binding.editTextNomeOrganizador.setText(organizador!!.Nome_organizador)
+                binding.editTextIdade.setText(organizador!!.idade)
+                binding.editTextTelemovel.setText(organizador!!.Telemovel)
+                binding.editTextEmail.setText(organizador!!.email)
+            }
+        }
+
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditarOrganizadorFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditarOrganizadorFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        const val ID_LOADER_ORGAZINADOR = 0
     }
+
+    /**
+     * Instantiate and return a new Loader for the given ID.
+     *
+     *
+     * This will always be called from the process's main thread.
+     *
+     * @param id The ID whose loader is to be created.
+     * @param args Any arguments supplied by the caller.
+     * @return Return a new Loader instance that is ready to start loading.
+     */
+
+    fun processaOpcaoMenu(item: MenuItem) : Boolean =
+        when(item.itemId) {
+            R.id.action_guardar -> {
+                guardar()
+                true
+            }
+            R.id.action_cancelar -> {
+                voltaListaOrganizador()
+                true
+            }
+            else -> false
+        }
+
+    private fun guardar() {
+        val nome = binding.editTextNomeOrganizador.text.toString()
+        if (nome.isBlank()) {
+            binding.editTextNomeOrganizador.error = getString(R.string.campo_obrigatorio)
+            binding.editTextNomeOrganizador.requestFocus()
+            return
+        }
+        val idade = binding.editTextIdade.text.toString()
+        if (idade.isBlank()) {
+            binding.editTextIdade.error = getString(R.string.campo_obrigatorio)
+            binding.editTextIdade.requestFocus()
+            return
+        }
+
+        val contacto= binding.editTextTelemovel.text.toString()
+        if (contacto.isBlank()) {
+            binding.editTextTelemovel.error = getString(R.string.campo_obrigatorio)
+            binding.editTextTelemovel.requestFocus()
+            return
+        }
+
+        val email = binding.editTextEmail.text.toString()
+        if (email.isBlank()) {
+            binding.editTextEmail.error = getString(R.string.campo_obrigatorio)
+            binding.editTextEmail.requestFocus()
+            return
+        }
+
+
+        val organizadorGuardado =
+            if (organizador== null) {
+                insereOrganizador(nome,idade,contacto,email)
+            } else {
+                alteraOrganizador(nome,idade, contacto, email)
+            }
+
+        if (organizadorGuardado) {
+            Toast.makeText(requireContext(), R.string.done, Toast.LENGTH_LONG)
+                .show()
+            voltaListaOrganizador()
+        } else {
+            Snackbar.make(binding.editTextNomeOrganizador, R.string.erro, Snackbar.LENGTH_INDEFINITE).show()
+            return
+        }
+    }
+
+    private fun alteraOrganizador(nome : String, idade : String, telemovel : String, email : String) : Boolean {
+        val organizador = Organizador(nome,idade,telemovel,email)
+
+        val enderecoOrganizador = Uri.withAppendedPath(ContentProviderEventos.ENDERECO_ORGANIZADOR, "${this.organizador!!.id}")
+
+        val registosAlterados = requireActivity().contentResolver.update(enderecoOrganizador, organizador.toContentValues(), null, null)
+
+        return registosAlterados == 1
+    }
+
+    private fun insereOrganizador(nome : String, idade : String,  telemovel : String, email : String ): Boolean {
+
+        val organizador = Organizador(nome, idade,telemovel,email)
+
+        val enderecoOrganizadorInserido = requireActivity().contentResolver.insert(ContentProviderEventos.ENDERECO_ORGANIZADOR, organizador.toContentValues())
+
+        return enderecoOrganizadorInserido != null
+    }
+
+    private fun voltaListaOrganizador() {
+        findNavController().navigate(R.id.action_editarOrganizadorFragment_to_SecondFragment)
+    }
+
+
 }

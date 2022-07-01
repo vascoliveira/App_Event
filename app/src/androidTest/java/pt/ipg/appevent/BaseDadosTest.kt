@@ -74,7 +74,7 @@ class BaseDadosTest {
     fun consegueInserirOrganizador() {
         val db = getWritableDatabase()
 
-        insereOrganizador(db, Organizador("Vasco", 25, "912392239", "vascodasd@gamil.com"))
+        insereOrganizador(db, Organizador("Vasco","25", "912392239", "vascodasd@gamil.com"))
 
         db.close()
     }
@@ -92,7 +92,7 @@ class BaseDadosTest {
     fun consegueInserirEvento() {
         val db = getWritableDatabase()
 
-        val organizador = Organizador("Vasco", 23, "2321312", "asdasdasd@adasd")
+        val organizador = Organizador("Vasco", "25", "2321312", "asdasdasd@adasd")
         insereOrganizador(db, organizador)
 
         val localidade = Localidade("Lisboa")
@@ -101,8 +101,20 @@ class BaseDadosTest {
         val tipo_evento = TipoEventos("Aventura")
         insereTipoEvento(db, tipo_evento)
 
-        val evento = Evento ("Docas","23/3/22","dadasd",organizador.id,localidade.id,tipo_evento.id)
+        val organizador1 = Organizador("Joao", "23", "919232312", "asdasdasd@adasd")
+        insereOrganizador(db, organizador)
+
+        val localidade1 = Localidade("Porto")
+        insereLocalidade(db, localidade)
+
+        val tipo_evento1 = TipoEventos("Futebol")
+        insereTipoEvento(db, tipo_evento)
+
+        val evento = Evento ("Futebol","23/3/22","Benfica vs Porto",organizador.id,localidade.id,tipo_evento.id)
         insereEvento(db,evento)
+
+        val evento1 = Evento ("docas","23/3/22","animais",organizador1.id,localidade1.id,tipo_evento1.id)
+        insereEvento(db,evento1)
 
         db.close()
     }
@@ -131,13 +143,13 @@ class BaseDadosTest {
     fun consegueAlterarOrganizador() {
         val db = getWritableDatabase()
 
-        val organizador = Organizador("Joao",37,"91919911","nnajaajaj@jajja.com")
+        val organizador = Organizador("Joao","23","91919911","nnajaajaj@jajja.com")
         insereOrganizador(db, organizador)
 
         organizador.Nome_organizador = "vasco"
         organizador.Telemovel= "919199191"
         organizador.email = "asdas@gasasd.com"
-        organizador.idade = 43
+        organizador.idade = "32"
 
         val registosAlterados = TabelaBDOrganizador(db).update(
             organizador.toContentValues(),
@@ -153,7 +165,7 @@ class BaseDadosTest {
     fun consegueAlterarEvento() {
         val db = getWritableDatabase()
 
-        val organizadorJoao = Organizador("Joao",37,"91919911","nnajaajaj@jajja.com")
+        val organizadorJoao = Organizador("Joao Antonio","23","91919911","nnajaajaj@jajja.com")
         insereOrganizador(db, organizadorJoao)
 
         val localidadeCoimbra = Localidade("Coimbra")
@@ -215,7 +227,7 @@ class BaseDadosTest {
     fun consegueEliminarEvento() {
         val db = getWritableDatabase()
 
-        val organizador = Organizador("Joao",37,"91919911","nnajaajaj@jajja.com")
+        val organizador = Organizador("Joao","34","91919911","nnajaajaj@jajja.com")
         insereOrganizador(db, organizador)
 
         val localidade = Localidade("Coimbra")
@@ -304,7 +316,7 @@ class BaseDadosTest {
         fun consegueLerOrganizador() {
             val db = getWritableDatabase()
 
-            val organizador= Organizador("Vasco",25,"91919292","asdasd@sadas")
+            val organizador= Organizador("Vasco","23","91919292","asdasd@sadas")
             insereOrganizador(db, organizador)
 
             val cursor = TabelaBDOrganizador(db).query(
@@ -327,7 +339,7 @@ class BaseDadosTest {
     fun consegueLerEvento() {
         val db = getWritableDatabase()
 
-        val organizador = Organizador("Vasco",23,"232131213","asdasdsad@")
+        val organizador = Organizador("Vasco","32","232131213","asdasdsad@")
         insereOrganizador(db,organizador)
 
         val localidade = Localidade("Lisboa")

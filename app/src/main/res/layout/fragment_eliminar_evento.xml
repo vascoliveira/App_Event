@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".eliminarEventoFragment" >
+    tools:context=".EliminarEventoFragment" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,14 +36,10 @@
             android:textColor="@color/purple_500" />
 
         <TextView
-            android:id="@+id/textViewTitulo"
-            android:layout_width="wrap_content"
+            android:id="@+id/textViewNomeEvento"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            tools:text="" />
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/textView4"
@@ -57,14 +53,10 @@
             android:textColor="@color/purple_500" />
 
         <TextView
-            android:id="@+id/textViewAutor"
-            android:layout_width="wrap_content"
+            android:id="@+id/textViewDataEvento"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-             />
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/textView6"
@@ -78,14 +70,10 @@
             android:textColor="@color/purple_500" />
 
         <TextView
-            android:id="@+id/textViewCategoria"
-            android:layout_width="wrap_content"
+            android:id="@+id/textViewDescricao"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-             />
+            android:text="TextView" />
 
     </LinearLayout>
 </FrameLayout>

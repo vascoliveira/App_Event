@@ -18,14 +18,18 @@ class AdapterOrganizador (val fragment: ListarOrganizadorFragment): RecyclerView
                 notifyDataSetChanged()
             }
         }
+    var viewHolderSelecionado : ViewHolderOrganizador? = null
 
 
-
-    class ViewHolderOrganizador(itemOrganizador: View) : RecyclerView.ViewHolder(itemOrganizador) {
+    inner class ViewHolderOrganizador(itemOrganizador: View) : RecyclerView.ViewHolder(itemOrganizador),View.OnClickListener {
         val textViewNomeOrganizador  = itemOrganizador.findViewById<TextView>(R.id.textViewNome)
         val textViewIdade = itemOrganizador.findViewById<TextView>(R.id.textViewIdade)
         val textViewTelemovel = itemOrganizador.findViewById<TextView>(R.id.textViewTelemovel)
         val textViewEmail = itemOrganizador.findViewById<TextView>(R.id.textViewEmail)
+
+        init {
+            itemOrganizador.setOnClickListener(this)
+        }
 
         var organizador : Organizador? = null
             get() = field
@@ -37,7 +41,22 @@ class AdapterOrganizador (val fragment: ListarOrganizadorFragment): RecyclerView
                 textViewTelemovel.text = organizador?.Telemovel ?: ""
                 textViewEmail.text = organizador?.email ?: ""
             }
+        override fun onClick(v: View?) {
+            viewHolderSelecionado?.desseleciona()
+            seleciona()
+        }
+
+        private fun seleciona() {
+            itemView.setBackgroundResource(android.R.color.holo_orange_light)
+            viewHolderSelecionado = this
+            fragment.OrganizadorSelecionado = organizador
+        }
+
+        private fun desseleciona() {
+            itemView.setBackgroundResource(android.R.color.white)
+        }
     }
+
 
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
@@ -108,6 +127,5 @@ class AdapterOrganizador (val fragment: ListarOrganizadorFragment): RecyclerView
 
         return cursor!!.count
     }
-
 
 }

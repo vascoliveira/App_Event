@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
+import androidx.navigation.fragment.findNavController
 
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -26,6 +27,7 @@ class ListarEventosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
         get() = field
         set(value) {
             field = value
+            (requireActivity() as MainActivity).mostraOpcoesAlterarEliminar (field!= null)
         }
 
 
@@ -55,6 +57,9 @@ class ListarEventosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
         binding.recyclerViewEventos.adapter = adapter_eventos
         binding.recyclerViewEventos.layoutManager = LinearLayoutManager(requireContext())
 
+        val activity = activity as MainActivity
+        activity.fragment = this
+        activity.idMenuAtual = R.menu.menu_lista
     }
 
     override fun onDestroyView() {
@@ -143,6 +148,15 @@ class ListarEventosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
         if (_binding == null) return
         adapter_eventos!!.cursor = null
     }
+    fun processaOpcaoMenu(item: MenuItem) : Boolean =
+        when(item.itemId) {
+            R.id.action_eliminar -> {
+                val acao = ListarEventosFragmentDirections.actionListarEventosToEliminarEventoFragment(eventoSelecionado!!)
+                findNavController().navigate(acao)
+                true
+            }
+            else -> false
+        }
 
 
     companion object {

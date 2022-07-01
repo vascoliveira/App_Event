@@ -18,6 +18,25 @@
     <string name="NomeEvento">Evento</string>
     <string name="Organizador">Organizador</string>
     />
-    <string name="tipoevento">TipoEvento</string>/>
+    <string name="tipoevento">TipoEvento</string>
+    <string name="alterar" />
+    <string name="eliminar" />
+    <string name="inserir" />
+    <string name="guardar" />
+    <string name="cancelar" />
+    <string name="action_settings" />
+    <string name="eliminar_evento_label" />
+    <string name="confirma_eliminar_evento" />
+    <string name="evento_eliminado_sucesso" />
+    <string name="erro_eliminar_evento" />
+    <string name="campo_obrigatorio" />
+    <string name="erro" />
+    <string name="done" />
+    <string name="delete_organizador" />
+    <string name="sure" />
+    <string name="delete" />
+    <string name="insere_Organizador" />
+    <string name="edit_Organizador" />
+    <string name="delete_Organizador" />/>
 
 </resources>

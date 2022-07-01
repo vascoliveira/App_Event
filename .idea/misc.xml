@@ -9,8 +9,9 @@
         <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/content_main_activity_fragment.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/first_fragment.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/fragment_editar_evento.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/fragment_editar_organizador.xml" value="0.125" />
+        <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/fragment_editar_organizador.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/fragment_eliminar_evento.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/fragment_eliminar_organizador.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/fragment_first.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/fragment_listar_eventos.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/fragment_listar_eventos_list.xml" value="0.16145833333333334" />
@@ -21,6 +22,10 @@
         <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/fragment_second.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/item_evento.xml" value="0.17447916666666666" />
         <entry key="..\:/Users/vasco/appevent/app/src/main/res/layout/item_organizador.xml" value="0.1" />
+        <entry key="..\:/Users/vasco/appevent/app/src/main/res/menu/menu_edicao.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/vasco/appevent/app/src/main/res/menu/menu_eliminar.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/vasco/appevent/app/src/main/res/menu/menu_lista.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/vasco/appevent/app/src/main/res/menu/menu_main.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/vasco/appevent/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.174" />
       </map>
     </option>

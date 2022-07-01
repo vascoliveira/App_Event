@@ -3,14 +3,15 @@ package pt.ipg.appevent
 import android.content.ContentValues
 import android.database.Cursor
 import android.provider.BaseColumns
+import java.io.Serializable
 
 data class Organizador (
     var Nome_organizador : String,
-    var idade: Int,
+    var idade: String,
     var Telemovel: String,
     var email: String,
     var id: Long = -1
-) {
+) : Serializable {
     fun toContentValues(): ContentValues {
         val valores = ContentValues()
         valores.put(TabelaBDOrganizador.NOME_ORGANIZADOR, Nome_organizador)
@@ -32,7 +33,7 @@ data class Organizador (
             val id = cursor.getLong(posId)
             val nome = cursor.getString(posNome)
             val email = cursor.getString(posEmail)
-            val idade = cursor.getInt(posIdade)
+            val idade = cursor.getString(posIdade)
             val telemovel = cursor.getString(posTelemovel)
 
             return Organizador(nome,idade,telemovel,email,id)

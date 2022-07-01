@@ -57,6 +57,11 @@
         <action
             android:id="@+id/action_editarOrganizadorFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <argument
+            android:name="organizador"
+            app:argType="pt.ipg.appevent.Organizador"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/eliminarOrganizadorFragment"
@@ -66,6 +71,9 @@
         <action
             android:id="@+id/action_eliminarOrganizadorFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <argument
+            android:name="organizador"
+            app:argType="pt.ipg.appevent.Organizador" />
     </fragment>
     <fragment
         android:id="@+id/editarEventoFragment"
@@ -78,11 +86,14 @@
     </fragment>
     <fragment
         android:id="@+id/eliminarEventoFragment"
-        android:name="pt.ipg.appevent.eliminarEventoFragment"
+        android:name="pt.ipg.appevent.EliminarEventoFragment"
         android:label="fragment_eliminar_evento"
         tools:layout="@layout/fragment_eliminar_evento" >
         <action
             android:id="@+id/action_eliminarEventoFragment_to_listarEventos"
             app:destination="@id/listarEventos" />
+        <argument
+            android:name="evento"
+            app:argType="pt.ipg.appevent.Evento" />
     </fragment>
 </navigation>

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
+import androidx.navigation.fragment.findNavController
 
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -23,10 +24,11 @@ import pt.ipg.appevent.databinding.FragmentListarOrganizadorBinding
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class ListarOrganizadorFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
-    var OrganizadorSelecionado: Evento? = null
+    var OrganizadorSelecionado :Organizador? = null
         get() = field
         set(value) {
             field = value
+            (requireActivity() as MainActivity).mostraOpcoesAlterarEliminar(field != null)
         }
 
 
@@ -56,6 +58,11 @@ class ListarOrganizadorFragment : Fragment(), LoaderManager.LoaderCallbacks<Curs
         binding.recyclerViewOrganizador.adapter = adapter_organizador
         binding.recyclerViewOrganizador.layoutManager = LinearLayoutManager(requireContext())
 
+        val activity = activity as MainActivity
+        activity.fragment = this
+        activity.idMenuAtual = R.menu.menu_lista
+
+
     }
 
     override fun onDestroyView() {
@@ -76,7 +83,7 @@ class ListarOrganizadorFragment : Fragment(), LoaderManager.LoaderCallbacks<Curs
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> =
         CursorLoader(
             requireContext(),
-            ContentProviderOrganizador.ENDERECO_ORGANIZADOR,
+            ContentProviderEventos.ENDERECO_ORGANIZADOR,
             TabelaBDOrganizador.TODAS_COLUNAS,
             null,
             null,
@@ -143,6 +150,30 @@ class ListarOrganizadorFragment : Fragment(), LoaderManager.LoaderCallbacks<Curs
     override fun onLoaderReset(loader: Loader<Cursor>) {
         if (_binding == null) return
         adapter_organizador!!.cursor = null
+    }
+
+
+    fun processaOpcaoMenu(item: MenuItem) : Boolean =
+    when(item.itemId) {
+        R.id.action_inserir -> {
+            val acao = ListarOrganizadorFragmentDirections.actionSecondFragmentToEditarOrganizadorFragment()
+            findNavController().navigate(acao)
+            (activity as MainActivity).atualizaEvento(R.string.insere_Organizador)
+            true
+        }
+        R.id.action_alterar -> {
+            val acao = ListarOrganizadorFragmentDirections.actionSecondFragmentToEditarOrganizadorFragment(OrganizadorSelecionado)
+            findNavController().navigate(acao)
+            (activity as MainActivity).atualizaEvento(R.string.edit_Organizador)
+            true
+        }
+        R.id.action_guardar -> {
+            val acao = ListarOrganizadorFragmentDirections.actionSecondFragmentToEliminarOrganizadorFragment(OrganizadorSelecionado!!)
+            findNavController().navigate(acao)
+            (activity as MainActivity).atualizaEvento(R.string.delete_Organizador)
+            true
+        }
+        else -> false
     }
 
 
