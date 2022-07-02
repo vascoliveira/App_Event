@@ -121,7 +121,7 @@ class EditarOrganizadorFragment : Fragment(){
             }
 
         if (organizadorGuardado) {
-            Toast.makeText(requireContext(), R.string.done, Toast.LENGTH_LONG)
+            Toast.makeText(requireContext(),R.string.done, Toast.LENGTH_LONG)
                 .show()
             voltaListaOrganizador()
         } else {
@@ -131,11 +131,12 @@ class EditarOrganizadorFragment : Fragment(){
     }
 
     private fun alteraOrganizador(nome : String, idade : String, telemovel : String, email : String) : Boolean {
+
         val organizador = Organizador(nome,idade,telemovel,email)
 
-        val enderecoOrganizador = Uri.withAppendedPath(ContentProviderEventos.ENDERECO_ORGANIZADOR, "${this.organizador!!.id}")
+        val enderecoOrganizador  = Uri.withAppendedPath(ContentProviderEventos.ENDERECO_ORGANIZADOR, "${this.organizador!!.id}")
 
-        val registosAlterados = requireActivity().contentResolver.update(enderecoOrganizador, organizador.toContentValues(), null, null)
+        val registosAlterados = requireActivity().contentResolver.update(enderecoOrganizador, organizador.toContentValues(),null,null )
 
         return registosAlterados == 1
     }
@@ -144,9 +145,9 @@ class EditarOrganizadorFragment : Fragment(){
 
         val organizador = Organizador(nome, idade,telemovel,email)
 
-        val enderecoOrganizadorInserido = requireActivity().contentResolver.insert(ContentProviderEventos.ENDERECO_ORGANIZADOR, organizador.toContentValues())
+        val OrganizadorInserido = requireActivity().contentResolver.insert(ContentProviderEventos.ENDERECO_ORGANIZADOR, organizador.toContentValues())
 
-        return enderecoOrganizadorInserido != null
+        return OrganizadorInserido != null
     }
 
     private fun voltaListaOrganizador() {
