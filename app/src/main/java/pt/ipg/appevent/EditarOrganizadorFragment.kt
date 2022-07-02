@@ -9,12 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import pt.ipg.appevent.Organizador
-import pt.ipg.appevent.ContentProviderEventos
 import com.google.android.material.snackbar.Snackbar
 import pt.ipg.appevent.databinding.FragmentEditarOrganizadorBinding
 
-class EditarOrganizadorFragment : Fragment(){
+class EditarOrganizadorFragment : Fragment() {
     private var _binding: FragmentEditarOrganizadorBinding? = null
 
     // This property is only valid between onCreateView and
@@ -47,17 +45,13 @@ class EditarOrganizadorFragment : Fragment(){
             organizador = EditarOrganizadorFragmentArgs.fromBundle(arguments!!).organizador
 
             if (organizador != null) {
-                binding.editTextNomeOrganizador.setText(organizador!!.Nome_organizador)
+                binding.editTextNomeOrganizador.setText(organizador!!.nomeOrganizador)
+                binding.editTextTelemovel.setText(organizador!!.telemovel)
                 binding.editTextIdade.setText(organizador!!.idade)
-                binding.editTextTelemovel.setText(organizador!!.Telemovel)
                 binding.editTextEmail.setText(organizador!!.email)
             }
         }
 
-    }
-
-    companion object {
-        const val ID_LOADER_ORGAZINADOR = 0
     }
 
     /**
@@ -71,14 +65,14 @@ class EditarOrganizadorFragment : Fragment(){
      * @return Return a new Loader instance that is ready to start loading.
      */
 
-    fun processaOpcaoMenu(item: MenuItem) : Boolean =
-        when(item.itemId) {
+    fun processaOpcaoMenu(item: MenuItem): Boolean =
+        when (item.itemId) {
             R.id.action_guardar -> {
                 guardar()
                 true
             }
             R.id.action_cancelar -> {
-                voltaListaOrganizador()
+                voltaListaOrganizadores()
                 true
             }
             else -> false
@@ -91,15 +85,16 @@ class EditarOrganizadorFragment : Fragment(){
             binding.editTextNomeOrganizador.requestFocus()
             return
         }
-        val idade = binding.editTextIdade.text.toString()
-        if (idade.isBlank()) {
-            binding.editTextIdade.error = getString(R.string.campo_obrigatorio)
-            binding.editTextIdade.requestFocus()
+
+        val contacto = binding.editTextTelemovel.text.toString()
+        if (contacto.isBlank()) {
+            binding.editTextTelemovel.error = getString(R.string.campo_obrigatorio)
+            binding.editTextTelemovel.requestFocus()
             return
         }
 
-        val contacto= binding.editTextTelemovel.text.toString()
-        if (contacto.isBlank()) {
+        val idade = binding.editTextTelemovel.text.toString()
+        if (idade.isBlank()) {
             binding.editTextTelemovel.error = getString(R.string.campo_obrigatorio)
             binding.editTextTelemovel.requestFocus()
             return
@@ -113,46 +108,69 @@ class EditarOrganizadorFragment : Fragment(){
         }
 
 
-        val organizadorGuardado =
-            if (organizador== null) {
-                insereOrganizador(nome,idade,contacto,email)
+        val clienteGuardado =
+            if (organizador == null) {
+                insereOrganizador(nome, contacto , idade, email )
             } else {
-                alteraOrganizador(nome,idade, contacto, email)
+                alteraOrganizador(nome, contacto, idade, email)
             }
 
-        if (organizadorGuardado) {
-            Toast.makeText(requireContext(),R.string.done, Toast.LENGTH_LONG)
+        if (clienteGuardado) {
+            Toast.makeText(requireContext(), R.string.done, Toast.LENGTH_LONG)
                 .show()
-            voltaListaOrganizador()
+            voltaListaOrganizadores()
         } else {
-            Snackbar.make(binding.editTextNomeOrganizador, R.string.erro, Snackbar.LENGTH_INDEFINITE).show()
+            Snackbar.make(
+                binding.editTextNomeOrganizador,
+                R.string.erro,
+                Snackbar.LENGTH_INDEFINITE
+            ).show()
             return
         }
     }
 
-    private fun alteraOrganizador(nome : String, idade : String, telemovel : String, email : String) : Boolean {
+    private fun alteraOrganizador(
+        nome: String,
+        telemovel: String,
+        idade: String,
+        email: String
+    ): Boolean {
+        val organizador = Organizador(nome, idade, telemovel, email)
 
-        val organizador = Organizador(nome,idade,telemovel,email)
+        val enderecoOrganizadores = Uri.withAppendedPath(
+            ContentProviderEventos.ENDERECO_ORGANIZADOR,
+            "${this.organizador!!.id}"
+        )
 
-        val enderecoOrganizador  = Uri.withAppendedPath(ContentProviderEventos.ENDERECO_ORGANIZADOR, "${this.organizador!!.id}")
-
-        val registosAlterados = requireActivity().contentResolver.update(enderecoOrganizador, organizador.toContentValues(),null,null )
+        val registosAlterados = requireActivity().contentResolver.update(
+            enderecoOrganizadores,
+            organizador.toContentValues(),
+            null,
+            null
+        )
 
         return registosAlterados == 1
     }
 
-    private fun insereOrganizador(nome : String, idade : String,  telemovel : String, email : String ): Boolean {
+    private fun insereOrganizador(
+        nome: String,
+        telemovel: String,
+        idade: String,
+        email: String
+    ): Boolean {
+        val organizador = Organizador(nome, idade, telemovel, email)
 
-        val organizador = Organizador(nome, idade,telemovel,email)
+        val enderecoOrganizadorInserido = requireActivity().contentResolver.insert(
+            ContentProviderEventos.ENDERECO_ORGANIZADOR,
+            organizador.toContentValues()
+        )
 
-        val OrganizadorInserido = requireActivity().contentResolver.insert(ContentProviderEventos.ENDERECO_ORGANIZADOR, organizador.toContentValues())
-
-        return OrganizadorInserido != null
+        return enderecoOrganizadorInserido != null
     }
 
-    private fun voltaListaOrganizador() {
+    private fun voltaListaOrganizadores() {
         findNavController().navigate(R.id.action_editarOrganizadorFragment_to_SecondFragment)
     }
-
-
 }
+
+

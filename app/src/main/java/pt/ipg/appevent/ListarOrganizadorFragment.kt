@@ -167,7 +167,7 @@ class ListarOrganizadorFragment : Fragment(), LoaderManager.LoaderCallbacks<Curs
             (activity as MainActivity).atualizaEvento(R.string.edit_Organizador)
             true
         }
-        R.id.action_guardar -> {
+        R.id.action_eliminar -> {
             val acao = ListarOrganizadorFragmentDirections.actionSecondFragmentToEliminarOrganizadorFragment(OrganizadorSelecionado!!)
             findNavController().navigate(acao)
             (activity as MainActivity).atualizaEvento(R.string.delete_Organizador)

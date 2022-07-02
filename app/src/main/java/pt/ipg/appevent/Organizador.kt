@@ -6,17 +6,17 @@ import android.provider.BaseColumns
 import java.io.Serializable
 
 data class Organizador (
-    var Nome_organizador : String,
+    var nomeOrganizador : String,
     var idade: String,
-    var Telemovel: String,
+    var telemovel: String,
     var email: String,
     var id: Long = -1
 ) : Serializable {
     fun toContentValues(): ContentValues {
         val valores = ContentValues()
-        valores.put(TabelaBDOrganizador.NOME_ORGANIZADOR, Nome_organizador)
+        valores.put(TabelaBDOrganizador.NOME_ORGANIZADOR, nomeOrganizador)
         valores.put(TabelaBDOrganizador.IDADE, idade)
-        valores.put(TabelaBDOrganizador.TELEMOVEL, Telemovel)
+        valores.put(TabelaBDOrganizador.TELEMOVEL, telemovel)
         valores.put(TabelaBDOrganizador.EMAIL, email)
 
         return valores

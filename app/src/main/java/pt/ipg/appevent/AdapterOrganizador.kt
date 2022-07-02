@@ -36,9 +36,9 @@ class AdapterOrganizador (val fragment: ListarOrganizadorFragment): RecyclerView
             set(value: Organizador?) {
                 field = value
 
-                textViewNomeOrganizador.text = organizador?.Nome_organizador ?: ""
+                textViewNomeOrganizador.text = organizador?.nomeOrganizador ?: ""
                 textViewIdade.text = (organizador?.idade?: "").toString()
-                textViewTelemovel.text = organizador?.Telemovel ?: ""
+                textViewTelemovel.text = organizador?.telemovel ?: ""
                 textViewEmail.text = organizador?.email ?: ""
             }
         override fun onClick(v: View?) {

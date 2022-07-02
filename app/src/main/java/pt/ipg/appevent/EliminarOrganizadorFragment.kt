@@ -46,16 +46,16 @@ class EliminarOrganizadorFragment : Fragment() {
 
         organizador = EliminarOrganizadorFragmentArgs.fromBundle(arguments!!).organizador
 
-        binding.textViewOrganizador.text = organizador.Nome_organizador
+        binding.textViewOrganizador.text = organizador.nomeOrganizador
         binding.textViewIdadeOrganizador.text = organizador.idade
-        binding.textViewTelemovelOrganizador.text = organizador.Telemovel
+        binding.textViewTelemovelOrganizador.text = organizador.telemovel
         binding.textViewEmailOrganizador.text = organizador.email
 
     }
 
     fun processaOpcaoMenu(item: MenuItem) : Boolean =
         when(item.itemId) {
-            R.id.action_guardar -> {
+            R.id.action_eliminar -> {
                 eliminaOrganizador()
                 true
             }

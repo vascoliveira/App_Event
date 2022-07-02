@@ -19,7 +19,7 @@
     <string name="Organizador">Organizador</string>
     />
     <string name="tipoevento">TipoEvento</string>
-    <string name="alterar" />
+    <string name="alterar">Alterar</string>
     <string name="eliminar" />
     <string name="inserir" />
     <string name="guardar" />
@@ -30,11 +30,11 @@
     <string name="evento_eliminado_sucesso" />
     <string name="erro_eliminar_evento" />
     <string name="campo_obrigatorio" />
-    <string name="erro" />
-    <string name="done" />
-    <string name="delete_organizador" />
-    <string name="sure" />
-    <string name="delete" />
+    <string name="erro">erro</string>
+    <string name="done">Feito</string>
+    <string name="delete_organizador">Apagar Organizador</string>
+    <string name="sure">Tem a certeza?</string>
+    <string name="delete" >Apagar?</string>
     <string name="insere_Organizador" />
     <string name="edit_Organizador" />
     <string name="delete_Organizador" />/>
