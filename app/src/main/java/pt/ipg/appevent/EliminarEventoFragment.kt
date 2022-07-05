@@ -48,6 +48,8 @@ class EliminarEventoFragment : Fragment() {
         binding.textViewNomeEvento.text = evento.Nome_Evento
         binding.textViewDataEvento.text = evento.Data
         binding.textViewDescricao.text = evento.Descricao
+        binding.textViewOrganizadorNome.text = evento.organizador
+
     }
 
     fun processaOpcaoMenu(item: MenuItem) : Boolean =

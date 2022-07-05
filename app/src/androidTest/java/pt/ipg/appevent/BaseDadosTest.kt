@@ -46,10 +46,10 @@ class BaseDadosTest {
     }
 
 
-    @Before
-    fun apagaBaseDados() {
-        appContext().deleteDatabase(BdHelper.NOME)
-    }
+    //@Before
+    //fun apagaBaseDados() {
+      // appContext().deleteDatabase(BdHelper.NOME)
+    //}
 
     @Test
     fun consegueAbrirBaseDados() {
@@ -69,7 +69,7 @@ class BaseDadosTest {
         insereTipoEvento(db, TipoEventos("Animacao"))
         insereTipoEvento(db, TipoEventos("Desporto"))
 
-        db.close()
+
     }
 
     @Test
@@ -77,8 +77,9 @@ class BaseDadosTest {
         val db = getWritableDatabase()
 
         insereOrganizador(db, Organizador("Vasco","25", "912392239", "vascodasd@gamil.com"))
+        insereOrganizador(db, Organizador("Joao","32", "91223323", "Joao@gamil.com"))
 
-        db.close()
+
     }
 
     @Test
@@ -112,13 +113,13 @@ class BaseDadosTest {
         val tipo_evento1 = TipoEventos("Futebol")
         insereTipoEvento(db, tipo_evento)
 
-        val evento = Evento ("Futebol","23/3/22","Benfica vs Porto",organizador.id,localidade.id,tipo_evento)
+        val evento = Evento ("Futebol","23/3/22","Benfica vs Porto","Vasco",localidade.id,tipo_evento)
         insereEvento(db,evento)
 
-        val evento1 = Evento ("docas","23/3/22","animais",organizador1.id,localidade1.id,tipo_evento1)
+        val evento1 = Evento ("docas","23/3/22","animais","Jose",localidade1.id,tipo_evento1)
         insereEvento(db,evento1)
 
-        db.close()
+
     }
 
     @Test
@@ -176,7 +177,7 @@ class BaseDadosTest {
         val tipo_eventoEconomina = TipoEventos("Economia")
         insereTipoEvento(db, tipo_eventoEconomina)
 
-        val evento = Evento("Praia","25/07/2022","Peniche",organizadorJoao.id,localidadeCoimbra.id,tipo_eventoEconomina)
+        val evento = Evento("Praia","25/07/2022","Peniche","Joao",localidadeCoimbra.id,tipo_eventoEconomina)
         insereEvento(db,evento)
 
 
@@ -229,22 +230,22 @@ class BaseDadosTest {
     fun consegueEliminarEvento() {
         val db = getWritableDatabase()
 
-        val organizador = Organizador("Joao","34","91919911","nnajaajaj@jajja.com")
-        insereOrganizador(db, organizador)
+        val organizador = Organizador("Vasco","32","232131213","asdasdsad@")
+        insereOrganizador(db,organizador)
 
-        val localidade = Localidade("Coimbra")
+        val localidade = Localidade("Lisboa")
         insereLocalidade(db, localidade)
 
-        val tipoevento = TipoEventos("tecnologico")
-        insereTipoEvento(db, tipoevento)
+        val tipoevento = TipoEventos("Musica")
+        insereTipoEvento(db,tipoevento)
 
-        val evento = Evento("Praia","25/07/2022","Peniche",organizador.id,localidade.id,tipoevento)
+        val evento = Evento("Ro ck on Rio","23/12/22","musica","Luis",localidade.id,tipoevento)
         insereEvento(db,evento)
 
 
         val registosEliminados = TabelaBDEvento(db).delete(
             "${BaseColumns._ID}=?",
-            arrayOf("${tipoevento.id}"))
+            arrayOf("${evento.id}"))
 
         assertEquals(1, registosEliminados)
 
@@ -350,7 +351,7 @@ class BaseDadosTest {
         val tipoevento = TipoEventos("Musica")
         insereTipoEvento(db,tipoevento)
 
-        val evento = Evento("Ro ck on Rio","23/12/22","musica",organizador.id,localidade.id,tipoevento)
+        val evento = Evento("Ro ck on Rio","23/12/22","musica","Antonio",localidade.id,tipoevento)
         insereEvento(db,evento)
 
         val cursor = TabelaBDEvento(db).query(

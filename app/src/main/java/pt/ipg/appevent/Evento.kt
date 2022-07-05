@@ -9,7 +9,7 @@ data class Evento (
     var Nome_Evento : String,
     var Data: String,
     var Descricao: String,
-    var organizador: Long,
+    var organizador: String,
     var localidade: Long,
     var tipo_eventos: TipoEventos,
     var id: Long = -1
@@ -42,7 +42,7 @@ data class Evento (
             val nome = cursor.getString(posNom)
             val data = cursor.getString(posData)
             val descricao = cursor.getString(posDesc)
-            val idOrganizador = cursor.getLong(posIdOrganizador)
+            val idOrganizador = cursor.getString(posIdOrganizador)
             val idLocalidade = cursor.getLong(posIdLocalidade)
             val idTipoEvento = cursor.getLong(posIdTipoEventos)
             val nomeTipoEventos = cursor.getString(posNomeTipoEvento)

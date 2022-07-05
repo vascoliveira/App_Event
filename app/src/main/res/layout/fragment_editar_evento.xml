@@ -45,12 +45,24 @@
             android:layout_height="wrap_content"
             android:text="TipoEvento" />
 
-        <Spinner
-            android:id="@+id/spinnerTipoEventos"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spinnerTipoEventos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditTextNomeOrganizador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck" />
-
+            android:hint="@string/Organizador" />
     </com.google.android.material.textfield.TextInputLayout>
+
 </LinearLayout>

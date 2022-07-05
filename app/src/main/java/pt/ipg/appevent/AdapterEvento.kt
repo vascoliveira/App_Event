@@ -27,6 +27,7 @@ class AdapterEvento(val fragment: ListarEventosFragment): RecyclerView.Adapter<A
         val textViewData = itemEvento.findViewById<TextView>(R.id.textViewData)
         val textViewdescricao = itemEvento.findViewById<TextView>(R.id.textViewdescricao)
         val textViewTipoEvento = itemEvento.findViewById<TextView>(R.id.textViewTipoEvento)
+        val textViewNomeOrganizador = itemEvento.findViewById<TextView>(R.id.textViewNomeOrganizador)
         init {
             itemEvento.setOnClickListener(this)
         }
@@ -46,6 +47,7 @@ class AdapterEvento(val fragment: ListarEventosFragment): RecyclerView.Adapter<A
                 textViewData.text = evento?.Data ?: ""
                 textViewdescricao.text = evento?.Descricao ?: ""
                 textViewTipoEvento.text = evento?.tipo_eventos?.tipo_de_evento ?: ""
+                textViewNomeOrganizador.text = evento?.organizador ?: ""
 
             }
 

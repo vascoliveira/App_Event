@@ -60,6 +60,7 @@ class EditarEventoFragment : Fragment(),LoaderManager.LoaderCallbacks<Cursor> {
                 binding.editTextNomeEvento.setText(evento!!.Nome_Evento)
                 binding.editTextOrganizador.setText(evento!!.Data)
                 binding.editTextDescricao.setText(evento!!.Descricao)
+                binding.EditTextNomeOrganizador.setText((evento!!.organizador).toString())
 
             }
         }
@@ -212,6 +213,12 @@ class EditarEventoFragment : Fragment(),LoaderManager.LoaderCallbacks<Cursor> {
             binding.editTextDescricao.requestFocus()
             return
         }
+        val organizador = binding.EditTextNomeOrganizador.text.toString()
+        if (organizador.isBlank()) {
+            binding.EditTextNomeOrganizador.error = getString(R.string.campo_obrigatorio)
+            binding.EditTextNomeOrganizador.requestFocus()
+            return
+        }
         val tipoEvento = binding.spinnerTipoEventos.selectedItemId
         if (tipoEvento == Spinner.INVALID_ROW_ID) {
             binding.textView5.error = getString(R.string.field_mandatory)
@@ -221,9 +228,9 @@ class EditarEventoFragment : Fragment(),LoaderManager.LoaderCallbacks<Cursor> {
 
         val eventoGuardado =
             if (evento == null) {
-                insereEvento(nome,data,descricao,tipoEvento)
+                insereEvento(nome,data,descricao,tipoEvento,organizador)
             } else {
-                alteraEvento(nome,data,descricao,tipoEvento)
+                alteraEvento(nome,data,descricao,tipoEvento,organizador)
             }
 
         if (eventoGuardado) {
@@ -245,8 +252,9 @@ class EditarEventoFragment : Fragment(),LoaderManager.LoaderCallbacks<Cursor> {
         data: String,
         descricao: String,
         idTipoEventos: Long,
+        organizador:String
     ): Boolean {
-        val evento = Evento(nome, data,descricao,2,1,TipoEventos( id= idTipoEventos))
+        val evento = Evento(nome, data,descricao,organizador,1,TipoEventos( id= idTipoEventos))
 
         val enderecoEvento = Uri.withAppendedPath(
             ContentProviderEventos.ENDERECO_EVENTOS,
@@ -268,10 +276,11 @@ class EditarEventoFragment : Fragment(),LoaderManager.LoaderCallbacks<Cursor> {
         data: String,
         descricao: String,
         idTipoEventos: Long,
+        organizador: String
 
     ): Boolean {
 
-        val evento = Evento(nome,data,descricao,1,2,TipoEventos( id= idTipoEventos))
+        val evento = Evento(nome,data,descricao,organizador ,2,TipoEventos( id= idTipoEventos))
 
         val enderecoEventoInserido = requireActivity().contentResolver.insert(
             ContentProviderEventos.ENDERECO_EVENTOS,

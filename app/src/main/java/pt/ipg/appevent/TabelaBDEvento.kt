@@ -11,7 +11,7 @@ class TabelaBDEvento(db: SQLiteDatabase) : TabelaBD(db, NOME) {
             "CREATE TABLE $nome (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $NOME_EVENTO TEXT NOT NULL," +
                     " $DATA TEXT NOT NULL, " +
                     "$DESCRICAO TEXT NOT NULL," +
-                    " $ORGANIZADOR_ID INTEGER NOT NULL ," +
+                    " $ORGANIZADOR_ID TEXT NOT NULL ," +
                     " $LOCALIDADE_ID INTEGER NOT NULL ," +
                     "$TIPO_EVENTOS_ID INTEGER NOT NULL," +
                     " FOREIGN KEY($ORGANIZADOR_ID) REFERENCES ${TabelaBDOrganizador.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT,"+
