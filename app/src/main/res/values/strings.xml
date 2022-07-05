@@ -34,14 +34,14 @@
     <string name="done">Done</string>
     <string name="delete_organizador">Delete Organizer</string>
     <string name="sure">Are you sure?</string>
-    <string name="delete" >Delete?</string>
+    <string name="delete" >Delete</string>
     <string name="insere_Organizador" >InserT Organizer</string>
     <string name="edit_Organizador" >Edit Organizer</string>
     <string name="delete_Organizador">Delete Organizer</string>
     <string name="insere_Evento">Insert Event</string>
     <string name="edit_Evento">Edit Event</string>
     <string name="delete_Evento">Delete Event</string>
-    <string name="field_mandatory" />
+    <string name="field_mandatory" >Field mandatory</string>
 
 
 </resources>

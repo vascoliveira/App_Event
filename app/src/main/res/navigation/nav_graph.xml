@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/listarEventos"
         android:name="pt.ipg.appevent.ListarEventosFragment"
-        android:label="Eventos"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_listar_eventos">
         <action
             android:id="@+id/action_listarEventos_to_MenuPrincipalFragment"
@@ -78,7 +78,7 @@
     <fragment
         android:id="@+id/editarEventoFragment"
         android:name="pt.ipg.appevent.EditarEventoFragment"
-        android:label="Editar Evento"
+        android:label="@string/edit_Evento"
         tools:layout="@layout/fragment_editar_evento">
         <action
             android:id="@+id/action_editarEventoFragment_to_listarEventos"
@@ -92,7 +92,7 @@
     <fragment
         android:id="@+id/eliminarEventoFragment"
         android:name="pt.ipg.appevent.EliminarEventoFragment"
-        android:label="Eliminar Evento"
+        android:label="@string/delete_Evento"
         tools:layout="@layout/fragment_eliminar_evento">
         <action
             android:id="@+id/action_eliminarEventoFragment_to_listarEventos"

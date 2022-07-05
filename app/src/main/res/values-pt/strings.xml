@@ -35,12 +35,12 @@
     <string name="done">Feito</string>
     <string name="delete_organizador">Apagar Organizador</string>
     <string name="sure">Tem a certeza?</string>
-    <string name="delete" >Apagar?</string>
+    <string name="delete" >Apagar</string>
     <string name="insere_Organizador" >Inserir Organizador</string>
     <string name="edit_Organizador" >Editar Organizador</string>
     <string name="delete_Organizador">Apagar Organizador</string>
     <string name="insere_Evento">Inserir Evento</string>
     <string name="edit_Evento">Editar Evento</string>
     <string name="delete_Evento">Apagar Evento</string>
-
+    <string name="field_mandatory" >Campo Obrigatorio</string>
 </resources>
