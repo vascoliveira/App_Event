@@ -18,6 +18,19 @@ class TabelaBDEvento(db: SQLiteDatabase) : TabelaBD(db, NOME) {
                     "FOREIGN KEY ($LOCALIDADE_ID) REFERENCES ${TabelaBDLocalidade.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT, " +
                     "FOREIGN KEY($TIPO_EVENTOS_ID)REFERENCES ${TabelaBDTipoEvento.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
+    override fun query(
+        columns: Array<String>,
+        selection: String?,
+        selectionArgs: Array<String>?,
+        groupBy: String?,
+        having: String?,
+        orderBy: String?
+    ): Cursor {
+        val queryBuilder = SQLiteQueryBuilder()
+        queryBuilder.tables = "$NOME INNER JOIN ${TabelaBDTipoEvento.NOME} ON ${TabelaBDTipoEvento.CAMPO_ID} = $TIPO_EVENTOS_ID"
+
+        return queryBuilder.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
+    }
 
         companion object {
         const val NOME = "Eventos"
@@ -31,7 +44,7 @@ class TabelaBDEvento(db: SQLiteDatabase) : TabelaBD(db, NOME) {
         const val TIPO_EVENTOS_ID= "Tipos_Eventos"
 
         val TODAS_COLUNAS = arrayOf(CAMPO_ID, NOME_EVENTO, DATA, DESCRICAO, ORGANIZADOR_ID,
-            LOCALIDADE_ID, TIPO_EVENTOS_ID)
+            LOCALIDADE_ID, TIPO_EVENTOS_ID,TabelaBDTipoEvento.TIPO_EVENTO)
     }
 }
 

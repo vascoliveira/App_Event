@@ -26,7 +26,7 @@ class AdapterEvento(val fragment: ListarEventosFragment): RecyclerView.Adapter<A
         val textViewEvento = itemEvento.findViewById<TextView>(R.id.textViewEvento)
         val textViewData = itemEvento.findViewById<TextView>(R.id.textViewData)
         val textViewdescricao = itemEvento.findViewById<TextView>(R.id.textViewdescricao)
-
+        val textViewTipoEvento = itemEvento.findViewById<TextView>(R.id.textViewTipoEvento)
         init {
             itemEvento.setOnClickListener(this)
         }
@@ -45,6 +45,8 @@ class AdapterEvento(val fragment: ListarEventosFragment): RecyclerView.Adapter<A
                 textViewEvento.text = evento?.Nome_Evento ?: ""
                 textViewData.text = evento?.Data ?: ""
                 textViewdescricao.text = evento?.Descricao ?: ""
+                textViewTipoEvento.text = evento?.tipo_eventos?.tipo_de_evento ?: ""
+
             }
 
         override fun onClick(v: View?) {

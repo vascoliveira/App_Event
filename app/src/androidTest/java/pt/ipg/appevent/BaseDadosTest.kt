@@ -66,6 +66,8 @@ class BaseDadosTest {
         val db = getWritableDatabase()
 
         insereTipoEvento(db, TipoEventos("Educacao"))
+        insereTipoEvento(db, TipoEventos("Animacao"))
+        insereTipoEvento(db, TipoEventos("Desporto"))
 
         db.close()
     }
@@ -110,10 +112,10 @@ class BaseDadosTest {
         val tipo_evento1 = TipoEventos("Futebol")
         insereTipoEvento(db, tipo_evento)
 
-        val evento = Evento ("Futebol","23/3/22","Benfica vs Porto",organizador.id,localidade.id,tipo_evento.id)
+        val evento = Evento ("Futebol","23/3/22","Benfica vs Porto",organizador.id,localidade.id,tipo_evento)
         insereEvento(db,evento)
 
-        val evento1 = Evento ("docas","23/3/22","animais",organizador1.id,localidade1.id,tipo_evento1.id)
+        val evento1 = Evento ("docas","23/3/22","animais",organizador1.id,localidade1.id,tipo_evento1)
         insereEvento(db,evento1)
 
         db.close()
@@ -146,8 +148,8 @@ class BaseDadosTest {
         val organizador = Organizador("Joao","23","91919911","nnajaajaj@jajja.com")
         insereOrganizador(db, organizador)
 
-        organizador.Nome_organizador = "vasco"
-        organizador.Telemovel= "919199191"
+        organizador.nomeOrganizador = "vasco"
+        organizador.telemovel= "919199191"
         organizador.email = "asdas@gasasd.com"
         organizador.idade = "32"
 
@@ -174,7 +176,7 @@ class BaseDadosTest {
         val tipo_eventoEconomina = TipoEventos("Economia")
         insereTipoEvento(db, tipo_eventoEconomina)
 
-        val evento = Evento("Praia","25/07/2022","Peniche",organizadorJoao.id,localidadeCoimbra.id,tipo_eventoEconomina.id)
+        val evento = Evento("Praia","25/07/2022","Peniche",organizadorJoao.id,localidadeCoimbra.id,tipo_eventoEconomina)
         insereEvento(db,evento)
 
 
@@ -236,7 +238,7 @@ class BaseDadosTest {
         val tipoevento = TipoEventos("tecnologico")
         insereTipoEvento(db, tipoevento)
 
-        val evento = Evento("Praia","25/07/2022","Peniche",organizador.id,localidade.id,tipoevento.id)
+        val evento = Evento("Praia","25/07/2022","Peniche",organizador.id,localidade.id,tipoevento)
         insereEvento(db,evento)
 
 
@@ -348,7 +350,7 @@ class BaseDadosTest {
         val tipoevento = TipoEventos("Musica")
         insereTipoEvento(db,tipoevento)
 
-        val evento = Evento("Ro ck on Rio","23/12/22","musica",organizador.id,localidade.id,tipoevento.id)
+        val evento = Evento("Ro ck on Rio","23/12/22","musica",organizador.id,localidade.id,tipoevento)
         insereEvento(db,evento)
 
         val cursor = TabelaBDEvento(db).query(

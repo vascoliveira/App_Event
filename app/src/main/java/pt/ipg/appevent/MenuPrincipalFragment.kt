@@ -36,7 +36,7 @@ class MenuPrincipalFragment : Fragment() {
         binding.eventos.setOnClickListener {
             findNavController().navigate(R.id.action_MenuPrincipalFragment_to_listarEventos)
         }
-        binding.Orgazinador.setOnClickListener {
+        binding.organizador.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 

@@ -150,9 +150,22 @@ class ListarEventosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
     }
     fun processaOpcaoMenu(item: MenuItem) : Boolean =
         when(item.itemId) {
+            R.id.action_inserir -> {
+                val acao = ListarEventosFragmentDirections.actionListarEventosToEditarEventoFragment()
+                findNavController().navigate(acao)
+                (activity as MainActivity).atualizaEvento(R.string.insere_Evento)
+                true
+            }
+            R.id.action_alterar -> {
+                val acao = ListarEventosFragmentDirections.actionListarEventosToEditarEventoFragment(eventoSelecionado)
+                findNavController().navigate(acao)
+                (activity as MainActivity).atualizaEvento(R.string.edit_Evento)
+                true
+            }
             R.id.action_eliminar -> {
                 val acao = ListarEventosFragmentDirections.actionListarEventosToEliminarEventoFragment(eventoSelecionado!!)
                 findNavController().navigate(acao)
+                (activity as MainActivity).atualizaEvento(R.string.delete_Evento)
                 true
             }
             else -> false

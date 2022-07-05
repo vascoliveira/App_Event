@@ -3,7 +3,6 @@ package pt.ipg.appevent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -62,7 +61,9 @@ class MainActivity : AppCompatActivity() {
                 opcaoProcessada = (fragment as MenuPrincipalFragment).processaOpcaoMenu(item)
             } else if (fragment is ListarEventosFragment) {
                 opcaoProcessada = (fragment as ListarEventosFragment).processaOpcaoMenu(item)
-            } else if (fragment is EliminarEventoFragment) {
+            }else if (fragment is EditarEventoFragment) {
+                opcaoProcessada = (fragment as EditarEventoFragment).processaOpcaoMenu(item)
+            }else if (fragment is EliminarEventoFragment) {
                 opcaoProcessada = (fragment as EliminarEventoFragment).processaOpcaoMenu(item)
             }else if (fragment is ListarOrganizadorFragment) {
                     opcaoProcessada = (fragment as ListarOrganizadorFragment).processaOpcaoMenu(item)

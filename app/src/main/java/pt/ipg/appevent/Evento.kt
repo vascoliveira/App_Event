@@ -11,7 +11,7 @@ data class Evento (
     var Descricao: String,
     var organizador: Long,
     var localidade: Long,
-    var tipo_eventos: Long,
+    var tipo_eventos: TipoEventos,
     var id: Long = -1
 ): Serializable {
     fun toContentValues(): ContentValues {
@@ -22,7 +22,7 @@ data class Evento (
         valores.put(TabelaBDEvento.DESCRICAO, Descricao)
         valores.put(TabelaBDEvento.ORGANIZADOR_ID, organizador)
         valores.put(TabelaBDEvento.LOCALIDADE_ID, localidade)
-        valores.put(TabelaBDEvento.TIPO_EVENTOS_ID, tipo_eventos)
+        valores.put(TabelaBDEvento.TIPO_EVENTOS_ID, tipo_eventos.id)
 
         return valores
     }
@@ -36,7 +36,7 @@ data class Evento (
             val posIdOrganizador = cursor.getColumnIndex(TabelaBDEvento.ORGANIZADOR_ID)
             val posIdLocalidade = cursor.getColumnIndex(TabelaBDEvento.LOCALIDADE_ID)
             val posIdTipoEventos = cursor.getColumnIndex(TabelaBDEvento.TIPO_EVENTOS_ID)
-
+            val posNomeTipoEvento = cursor.getColumnIndex(TabelaBDTipoEvento.TIPO_EVENTO)
 
             val id = cursor.getLong(posId)
             val nome = cursor.getString(posNom)
@@ -45,10 +45,13 @@ data class Evento (
             val idOrganizador = cursor.getLong(posIdOrganizador)
             val idLocalidade = cursor.getLong(posIdLocalidade)
             val idTipoEvento = cursor.getLong(posIdTipoEventos)
+            val nomeTipoEventos = cursor.getString(posNomeTipoEvento)
+
+            val tipoEvento = TipoEventos(nomeTipoEventos, idTipoEvento)
 
 
 
-            return Evento (nome, data, descricao, idOrganizador, idLocalidade, idTipoEvento, id)
+            return Evento (nome, data, descricao, idOrganizador, idLocalidade, tipoEvento, id)
         }
     }
 }

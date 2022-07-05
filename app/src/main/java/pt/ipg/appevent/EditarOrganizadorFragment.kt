@@ -93,10 +93,10 @@ class EditarOrganizadorFragment : Fragment() {
             return
         }
 
-        val idade = binding.editTextTelemovel.text.toString()
+        val idade = binding.editTextIdade.text.toString()
         if (idade.isBlank()) {
-            binding.editTextTelemovel.error = getString(R.string.campo_obrigatorio)
-            binding.editTextTelemovel.requestFocus()
+            binding.editTextIdade.error = getString(R.string.campo_obrigatorio)
+            binding.editTextIdade.requestFocus()
             return
         }
 

@@ -310,7 +310,7 @@ class ContentProviderEventos : ContentProvider() {
             uriMatcher.addURI(AUTORIDADE, TabelaBDOrganizador.NOME, URI_organizador)
             uriMatcher.addURI(AUTORIDADE, "${TabelaBDOrganizador.NOME}/#", URI_organizador_especifico)
             uriMatcher.addURI(AUTORIDADE, TabelaBDLocalidade.NOME, URI_localidade)
-            uriMatcher.addURI(AUTORIDADE, "${TabelaBDOrganizador.NOME}/#", URI_localidade_especifica)
+            uriMatcher.addURI(AUTORIDADE, "${TabelaBDLocalidade.NOME}/#", URI_localidade_especifica)
 
             return uriMatcher
         }

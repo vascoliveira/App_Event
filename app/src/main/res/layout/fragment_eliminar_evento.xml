@@ -32,14 +32,15 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/NomeEvento"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/purple_500" />
 
         <TextView
             android:id="@+id/textViewNomeEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/textView4"
@@ -49,14 +50,15 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/Organizador"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/purple_500" />
 
         <TextView
             android:id="@+id/textViewDataEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/textView6"
@@ -66,14 +68,15 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/tipoevento"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/purple_500" />
 
         <TextView
             android:id="@+id/textViewDescricao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     </LinearLayout>
 </FrameLayout>
